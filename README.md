@@ -1,8 +1,6 @@
 #### ThoughtWorks LevelUp presents
-HAI KAI
 
 # Driver
-Hi Joe!
 Repository for Melb Level Up Driver
 
 
