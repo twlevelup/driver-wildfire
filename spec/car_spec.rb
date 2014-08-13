@@ -56,5 +56,29 @@ RSpec.describe Car do
   	expect(d.move).to eq("Invalid Starting Position")
   end
 
+  it 'should return "W" when the car is facing North then do a leftturn' do
+    car = Car.new(0,0,:N)
+    result = car.left_turn
+    expect(result).to eq("W")
+  end
 
+  it 'should return "E" when the car is facing South then do a leftturn' do
+    car = Car.new(1,1,:S)
+    expect(car.left_turn).to eq("E")
+  end
+
+  it 'should return "N" when the car is facing East then do a leftturn' do
+    car = Car.new(1,2,:E)
+    expect(car.left_turn).to eq("N")
+  end
+
+  it 'should return "S" when the car is facing West then do a leftturn' do
+    car = Car.new(2,3,:W)
+    expect(car.left_turn).to eq("S")
+  end
+
+  it 'should return "Wrong initial direction" when the car is facing an unclear direction (expect for :N,:S,:W,:E)' do
+    car = Car.new(3,1,:Start)
+    expect(car.left_turn).to eq("Wrong initial direction")
+  end
 end

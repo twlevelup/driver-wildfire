@@ -29,6 +29,26 @@ class Car
 	    	end
 	    end
     end
+
+    def left_turn
+    	case @direction
+    	when :N
+    		@direction = :W
+    		return"#{@direction}"
+    	when :S
+    		@direction = :E
+    		return "#{@direction}"
+    	when :E
+    		@direction = :N
+    		return "#{@direction}"
+    	when :W
+    		@direction = :S
+    		return "#{@direction}"
+    	else
+    		"Wrong initial direction"
+    	end
+
+    end
 end
 
 
