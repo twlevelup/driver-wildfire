@@ -1,8 +1,16 @@
 class Car
+    attr_accessor :direction
+	attr_accessor :position
+    def initialize (x,y,direction)
 
-	def initialize (x,y,direction)
-		@position = [x,y]
-		@direction = direction
+        @position = [x,y]
+		
+        case direction
+        when :N ,:S ,:E ,:W
+            @direction = direction
+        else
+            @direction = "Wrong initial direction"
+        end
 	end
 
 	def honk
@@ -16,16 +24,20 @@ class Car
     		"Invalid Starting Position"
     	else
 	    	case @direction
-	    	when "North"
-	    		[@position[0], @position[1]+1]
-	    	when "South"
-	    		[@position[0], @position[1]-1]
-	    	when "East"
-	    		[@position[0]+1, @position[1]]
-	    	when "West"
-	    		[@position[0]-1, @position[1]]
+	    	when :N
+                @position[1] += 1
+                return @position
+	    	when :S
+	    		@position[1] -= 1
+                return @position
+	    	when :E
+	    		@position[0] += 1
+                return @position
+	    	when :W
+	    		@position[0] -= 1
+                return @position
 	    	else
-	    		"Wrong Direction"
+	    		"Wrong initial direction"
 	    	end
 	    end
     end
