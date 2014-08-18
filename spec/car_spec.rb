@@ -26,22 +26,22 @@ RSpec.describe Car do
   	expect(d.move).to eq([-1,0])
   end
 
-  it "should return position [12,6] when moves north starts from [12,5]" do
+  it "should return position [12,6] when moves North starting from [12,5]" do
   	d = Car.new(12,5,"North")
   	expect(d.move).to eq([12,6])
   end
 
-  it "should return position [5,3] when moves south and starts from [5,4]" do
+  it "should return position [5,3] when moves South and starting from [5,4]" do
   	d = Car.new(5,4,"South")
   	expect(d.move).to eq([5,3])
   end
 
-  it "should return position [11,3] when moves east starts from [10,3]" do
+  it "should return position [11,3] when moves East starting from [10,3]" do
   	d = Car.new(10,3,"East")
   	expect(d.move).to eq([11,3])
   end
 
-  it "should return position [5,7] when moves west starts from [6,7]" do
+  it "should return position [5,7] when moves West starting from [6,7]" do
   	d = Car.new(6,7,"West")
   	expect(d.move).to eq([5,7])
   end
@@ -55,6 +55,4 @@ RSpec.describe Car do
   	d = Car.new(-1,-2,"North")
   	expect(d.move).to eq("Invalid Starting Position")
   end
-
-
 end
