@@ -45,16 +45,12 @@ class Car
     	case @direction
     	when :N
     		@direction = :W
-    		#return "#{@direction}"
     	when :S
     		@direction = :E
-    		#return "#{@direction}"
     	when :E
     		@direction = :N
-    		#return "#{@direction}"
     	when :W
     		@direction = :S
-    		#return "#{@direction}"
     	else
     		"Wrong initial direction"
     	end
@@ -64,16 +60,12 @@ class Car
         case @direction
         when :N
             @direction = :E
-            #return "#{@direction}"
         when :E
             @direction = :S
-            #return "#{@direction}"
         when :S
             @direction = :W
-            #return "#{@direction}"
         when :W
             @direction = :N
-            #return "#{@direction}"
         else
             "Wrong initial direction"
         end
