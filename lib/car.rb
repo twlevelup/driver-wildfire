@@ -18,7 +18,6 @@ class Car
     end
 
 
-
     def move 
         if (@position[0] < 0 ) || (@position[1] < 0)
     		"Invalid Starting Position"
@@ -42,39 +41,39 @@ class Car
 	    end
     end
 
-    def left_turn
+    def turn_left
     	case @direction
     	when :N
     		@direction = :W
-    		return"#{@direction}"
+    		#return "#{@direction}"
     	when :S
     		@direction = :E
-    		return "#{@direction}"
+    		#return "#{@direction}"
     	when :E
     		@direction = :N
-    		return "#{@direction}"
+    		#return "#{@direction}"
     	when :W
     		@direction = :S
-    		return "#{@direction}"
+    		#return "#{@direction}"
     	else
     		"Wrong initial direction"
     	end
 	end
 
-	def right_turn
+	def turn_right
         case @direction
         when :N
             @direction = :E
-            return "#{@direction}"
+            #return "#{@direction}"
         when :E
             @direction = :S
-            return "#{@direction}"
+            #return "#{@direction}"
         when :S
             @direction = :W
-            return "#{@direction}"
+            #return "#{@direction}"
         when :W
             @direction = :N
-            return "#{@direction}"
+            #return "#{@direction}"
         else
             "Wrong initial direction"
         end
