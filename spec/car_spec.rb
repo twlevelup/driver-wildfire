@@ -5,10 +5,6 @@ def getCar(x, y, direction)
 end
 
 RSpec.describe Car do
-  it "should honk" do
-    expect(getCar(0, 0, :N).honk).to eq('honk honk toot toot beep beep')
-  end
-
   it "should move north by one" do
     d = Car.new(0,0,:N)
   	expect(d.move).to eq([0,1])
@@ -51,8 +47,14 @@ RSpec.describe Car do
 
   it 'should return :W when the car is facing North then do a left turn' do
     car = Car.new(0,0,:N)
-    result = car.turn_left
-    expect(result).to eq(:W)
+    car.turn_left
+    expect(car.direction).to eq(:W)
+  end
+
+  it 'should return [0,0] when the car is facing North then do a left turn' do
+    car = Car.new(0,0,:N)
+    car.turn_left
+    expect(car.position).to eq([0,0])
   end
 
   it 'should return :E when the car is facing South then do a left turn' do

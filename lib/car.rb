@@ -13,11 +13,6 @@ class Car
         end
 	end
 
-	def honk
-        'honk honk toot toot beep beep'
-    end
-
-
     def move 
         if (@position[0] < 0 ) || (@position[1] < 0)
     		"Invalid Starting Position"
