@@ -69,6 +69,21 @@ class Car
         else
             "Wrong initial direction"
         end
+    end
+
+    def stackCommands (commandList)
+        commandList.each do |item| 
+            case item
+            when :F
+                move()
+            when :L 
+                turn_left()
+            when :R 
+                turn_right()
+            else
+                "Wrong Command"
+            end
+        end
     end            
 end
 
