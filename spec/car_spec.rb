@@ -261,33 +261,32 @@ RSpec.describe Car do
 
   context "test for stack commands" do
 
- it 'do series commands' do
+   it 'do series commands' do
+      car = Car.new(0,0,:N)
+      car.stackCommands([:F,:F,:R,:F,:L,:F])
+      expect(car.position).to eq([1,3])
+      expect(car.direction).to eq(:N)
+    end
+
+    it 'test for serises of "move forward" commands' do
+      car = Car.new(0,0,:N)
+      car.stackCommands([:F,:F])
+      expect(car.position).to eq([0,2])
+      expect(car.direction).to eq(:N)
+    end
+
+    it 'should return (0,0,S) starting from (0,0,N) giving [R,R]' do
     car = Car.new(0,0,:N)
-    car.stackCommands([:F,:F,:R,:F,:L,:F])
-    expect(car.position).to eq([1,3])
-    expect(car.direction).to eq(:N)
-  end
+       car.stackCommands([:R,:R])
+      expect(car.position).to eq([0,0])
+      expect(car.direction).to eq(:S)
+    end
 
-  it 'test for serises of "move forward" commands' do
-    car = Car.new(0,0,:N)
-    car.stackCommands([:F,:F])
-    expect(car.position).to eq([0,2])
-    expect(car.direction).to eq(:N)
+     it 'should return (4,5,E) starting from (4,5,S) giving [F,L,F,L,F,L,F]' do
+      car = Car.new(4,5,:E)
+      car.stackCommands([:F,:L,:F,:L,:F,:L,:F])
+      expect(car.position).to eq([4,5])
+      expect(car.direction).to eq(:S)
+    end
   end
-
-  it 'should return (0,0,S) starting from (0,0,N) giving [R,R]' do
-  car = Car.new(0,0,:N)
-     car.stackCommands([:R,:R])
-    expect(car.position).to eq([0,0])
-    expect(car.direction).to eq(:S)
-  end
-
-   it 'should return (4,5,E) starting from (4,5,S) giving [F,L,F,L,F,L,F]' do
-    car = Car.new(4,5,:E)
-    car.stackCommands([:F,:L,:F,:L,:F,:L,:F])
-    expect(car.position).to eq([4,5])
-    expect(car.direction).to eq(:S)
-  end
-
-end
 end
