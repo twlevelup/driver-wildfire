@@ -1,9 +1,9 @@
 class Car
     attr_accessor :direction
 	attr_accessor :position
-    def initialize (x,y,direction)
+    def initialize (positionObject,direction)
 
-        @position = [x,y]
+        @position = positionObject
 		
         case direction
         when :N ,:S ,:E ,:W
@@ -14,26 +14,22 @@ class Car
 	end
 
     def move 
-        if (@position[0] < 0 ) || (@position[1] < 0)
-    		"Invalid Starting Position"
+    	case @direction
+    	when :N
+            @position.y += 1
+            return @position
+    	when :S
+    		@position.y -= 1
+            return @position
+    	when :E
+    		@position.x += 1
+            return @position
+    	when :W
+    		@position.x -= 1
+            return @position
     	else
-	    	case @direction
-	    	when :N
-                @position[1] += 1
-                return @position
-	    	when :S
-	    		@position[1] -= 1
-                return @position
-	    	when :E
-	    		@position[0] += 1
-                return @position
-	    	when :W
-	    		@position[0] -= 1
-                return @position
-	    	else
-	    		"Wrong initial direction"
-	    	end
-	    end
+    		"Wrong initial direction"
+    	end
     end
 
     def turn_left
