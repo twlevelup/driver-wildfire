@@ -1,6 +1,6 @@
 class Car
     attr_accessor :direction
-	attr_accessor :position
+	  attr_accessor :position
     def initialize (positionObject,direction)
 
         @position = positionObject
