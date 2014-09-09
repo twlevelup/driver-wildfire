@@ -147,16 +147,25 @@ RSpec.describe Car do
       it 'reaching when the car is facing north' do
         facingNorth.move_to_location(destination_1)
         expect(facingNorth.position.get_coordinates).to eq(destination_1.get_coordinates)
+        expect(facingNorth.direction).to eq(:N)
       end
 
       it 'reaching when the car is facing south' do
         facingSouth.move_to_location(destination_1)
         expect(facingSouth.position.get_coordinates).to eq(destination_1.get_coordinates)
+        expect(facingSouth.direction).to eq(:N)
+      end
+
+      it 'reaching when the car is facing east' do
+        facingEast.move_to_location(destination_1)
+        expect(facingEast.position.get_coordinates).to eq(destination_1.get_coordinates)
+        expect(facingEast.direction).to eq(:N)
       end
 
       it 'reaching when the car is facing west' do
         facingWest.move_to_location(destination_1)
         expect(facingWest.position.get_coordinates).to eq(destination_1.get_coordinates)
+        expect(facingWest.direction).to eq(:N)
       end
     end
 
@@ -164,16 +173,25 @@ RSpec.describe Car do
       it 'reaching when the car is facing north' do
         facingNorth.move_to_location(destination_2)
         expect(facingNorth.position.get_coordinates).to eq(destination_2.get_coordinates)
+        expect(facingNorth.direction).to eq(:S)
       end
 
       it 'reaching when the car is facing south' do
         facingSouth.move_to_location(destination_2)
         expect(facingSouth.position.get_coordinates).to eq(destination_2.get_coordinates)
+        expect(facingSouth.direction).to eq(:S)
+      end
+
+      it 'reaching when the car is facing east' do
+        facingEast.move_to_location(destination_2)
+        expect(facingEast.position.get_coordinates).to eq(destination_2.get_coordinates)
+        expect(facingEast.direction).to eq(:S)
       end
 
       it 'reaching when the car is facing west' do
         facingWest.move_to_location(destination_2)
         expect(facingWest.position.get_coordinates).to eq(destination_2.get_coordinates)
+        expect(facingWest.direction).to eq(:S)
       end
      end
   end
