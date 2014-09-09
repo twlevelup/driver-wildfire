@@ -14,11 +14,11 @@ describe Position do
 	expect(Position.new(2,4).y).to eq(4)
 	end
 
-  it 'checking the validity of a position on the grid' do
+  	it 'checking the validity of a position on the grid' do
       expect(positionSec.is_valid?(grid)).to eq(true)
     end
 
-  it 'check an incremented position is valid' do
+  	it 'check an incremented position is valid' do
       expect(positionSec.+(:y).is_valid?(grid)).to eq(true)
     end
 

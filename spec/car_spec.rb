@@ -139,5 +139,43 @@ RSpec.describe Car do
     end
   end
 
+  context "Test move_to_location function" do
+    let (:destination_1)  {Position.new(15,15)}
+    let (:destination_2) {Position.new(1,1)}
 
+    context 'reaching to a north-east destination' do
+      it 'reaching when the car is facing north' do
+        facingNorth.move_to_location(destination_1)
+        expect(facingNorth.position.get_coordinates).to eq(destination_1.get_coordinates)
+      end
+
+      it 'reaching when the car is facing south' do
+        facingSouth.move_to_location(destination_1)
+        expect(facingSouth.position.get_coordinates).to eq(destination_1.get_coordinates)
+      end
+
+      it 'reaching when the car is facing west' do
+        facingWest.move_to_location(destination_1)
+        expect(facingWest.position.get_coordinates).to eq(destination_1.get_coordinates)
+      end
+    end
+
+    context 'reaching to a south_west destination' do
+      it 'reaching when the car is facing north' do
+        facingNorth.move_to_location(destination_2)
+        expect(facingNorth.position.get_coordinates).to eq(destination_2.get_coordinates)
+      end
+
+      it 'reaching when the car is facing south' do
+        facingSouth.move_to_location(destination_2)
+        expect(facingSouth.position.get_coordinates).to eq(destination_2.get_coordinates)
+      end
+
+      it 'reaching when the car is facing west' do
+        facingWest.move_to_location(destination_2)
+        expect(facingWest.position.get_coordinates).to eq(destination_2.get_coordinates)
+      end
+     end
+  end
 end
+
