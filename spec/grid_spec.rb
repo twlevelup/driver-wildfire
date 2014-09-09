@@ -8,11 +8,11 @@ RSpec.describe Grid do
 	let (:valid_position) { Position.new(2,0) }
 	let (:invalid_position) { Position.new(-2,0) }
 
-	it 'cheking point (2,0), should return true' do
-	    expect(subject.valid_position?(valid_position)).to eq(true)
+	it 'should return true for a valid location on the grid' do
+		expect(valid_position.is_valid?(valid_position, subject)).to eq(true)
 	end
 
 	it 'should return false for a location outside the grid' do
-	    expect(subject.valid_position?(invalid_position)).to eq(false)
+	    expect(invalid_position.is_valid?(invalid_position, subject)).to eq(false)
 	end
 end
