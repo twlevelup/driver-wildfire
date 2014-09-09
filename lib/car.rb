@@ -78,7 +78,7 @@ class Car
         end
     end
 
-    def stackCommands (commandList)
+    def stack_commands (commandList)
         commandList.each do |item| 
             case item
             when :F
@@ -160,7 +160,7 @@ class Car
             commands.push(:F)
         end
 
-        return stackCommands(commands)
+        return stack_commands(commands)
     end          
 end
 

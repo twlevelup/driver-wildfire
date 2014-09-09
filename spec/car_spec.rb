@@ -115,25 +115,25 @@ RSpec.describe Car do
   describe "test for stack commands function" do
 
     it 'do series commands' do
-      facingNorth.stackCommands([:F,:F,:R,:F,:L,:F])
+      facingNorth.stack_commands([:F,:F,:R,:F,:L,:F])
       expect(facingNorth.position.get_coordinates).to eq([5,8])
       expect(facingNorth.direction).to eq(:N)
     end
 
     it 'test for serises of "move forward" commands' do
-      facingSouth.stackCommands([:F,:F])
+      facingSouth.stack_commands([:F,:F])
       expect(facingSouth.position.get_coordinates).to eq([3,1])
       expect(facingSouth.direction).to eq(:S)
     end
 
     it 'test serises of "turn" commands' do
-      facingWest.stackCommands([:R,:R,:L,:L,:L])
+      facingWest.stack_commands([:R,:R,:L,:L,:L])
       expect(facingWest.position.get_coordinates).to eq([4,5])
       expect(facingWest.direction).to eq(:S)
     end
 
     it 'test for complicated commands' do
-      facingEast.stackCommands([:F,:L,:F,:L,:F,:L,:F])
+      facingEast.stack_commands([:F,:L,:F,:L,:F,:L,:F])
       expect(facingEast.position.get_coordinates).to eq([3,3])
       expect(facingEast.direction).to eq(:S)
     end
