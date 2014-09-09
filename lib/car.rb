@@ -1,5 +1,3 @@
-require './lib/position'
-
 class Car
     attr_accessor :direction
 	  attr_accessor :position
