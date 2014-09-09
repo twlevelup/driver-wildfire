@@ -1,27 +1,28 @@
 require 'car'
 require 'position'
+require 'grid'
 RSpec.describe Car do
-    let(:x1) {0}
-    let(:x2) {4}
-    let(:x3) {-1}
-    let(:y1) {0}
-    let(:y2) {5}
-    let(:y3) {-2}
+    let (:grid) {Grid.new(0,50,0,50)}
+    let (:x1) {0}
+    let (:x2) {4}
+    let (:x3) {-1}
+    let (:y1) {0}
+    let (:y2) {5}
+    let (:y3) {-2}
     let (:positionFirst) { Position.new(x1,y1)}
     let (:positionSec) { Position.new(x2,y2)}
     let (:positionThird) { Position.new(x3,y3)} 
-    let (:facingSouth) {Car.new(positionFirst,:S)}
-    let (:facingEast)  {Car.new(positionFirst,:E)}
-    let (:facingNorth)  {Car.new(positionSec,:N)}
-    let (:facingWest)  {Car.new(positionSec,:W)}
-    let (:facingWrongDirection) {Car.new(positionFirst,:Start)}
+    let (:facingSouth) {Car.new(grid, positionFirst, :S)}
+    let (:facingEast)  {Car.new(grid, positionFirst, :E)}
+    let (:facingNorth)  {Car.new(grid, positionSec, :N)}
+    let (:facingWest)  {Car.new(grid, positionSec, :W)}
+    let (:facingWrongDirection) {Car.new(grid, positionFirst, :Start)}
   
   describe "Test move function" do
     it "facing north" do
       facingNorth.move
       expect(facingNorth.position.get_coordinates).to eq([x2, y2+1])
     end
-
 
     it "facing south" do 
       facingSouth.move

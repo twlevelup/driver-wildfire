@@ -1,9 +1,12 @@
 class Car
     attr_accessor :direction
 	  attr_accessor :position
-    def initialize (positionObject,direction)
+      attr_accessor :grid
+    def initialize (grid, positionObject, direction)
 
+        @grid = grid
         @position = positionObject
+        
 		
         case direction
         when :N ,:S ,:E ,:W
@@ -14,10 +17,12 @@ class Car
 	end
 
     def move 
+
+        @temp_pos = @position
     	case @direction
     	when :N
-            @position.y += 1
-            return @position
+                @position.y += 1
+                return @position
     	when :S
     		@position.y -= 1
             return @position
