@@ -100,7 +100,7 @@ class Car
 
         # Handle x component
         if position.x < destination.x
-            # should be facing east
+            # should make the car to be facing east
             case direction
             when :N
                 commands.push(:R)
@@ -112,15 +112,15 @@ class Car
             end
             direction = :E
         elsif position.x > destination.x
-            # should be facing west
+            # should make the car to be facing west
             case direction
             when :N
                 commands.push(:L)
             when :S
                 commands.push(:R)
             when :E
-                commands(:L)
-                commands(:L)
+                commands.push(:L)
+                commands.push(:L)
             end
             direction = :W
         end
@@ -131,7 +131,7 @@ class Car
 
         # handle y component
         if position.y < destination.y
-            # should be facing north
+            # should make the car to be facing north
             case direction
             when :E
                 commands.push(:L)
@@ -143,7 +143,7 @@ class Car
             end
             direction = :N
         elsif position.y > destination.y
-            # should be facing south
+            # should make the car to be facing south
             case direction
             when :E
                 commands.push(:R)
