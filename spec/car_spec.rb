@@ -19,28 +19,26 @@ RSpec.describe Car do
   describe "Test move function" do
     it "facing north" do
       facingNorth.move
-      expect(facingNorth.position.x).to eq(x2)
-      expect(facingNorth.position.y).to eq(y2+1)
+      expect(facingNorth.position.get_coordinates).to eq([x2, y2+1])
     end
+
 
     it "facing south" do 
       facingSouth.move
-      expect(facingSouth.position.x).to eq(x1)
-      expect(facingSouth.position.y).to eq(y1-1)
+      expect(facingSouth.position.get_coordinates).to eq([x1, y1-1])
     end
 
     it "facing east" do 
       facingEast.move
-      expect(facingEast.position.x).to eq(x1+1)
-      expect(facingEast.position.y).to eq(y1)
+      expect(facingEast.position.get_coordinates).to eq([x1+1, y1])
     end
 
     it "facing west" do
       facingWest.move
-      expect(facingWest.position.x).to eq(x2-1)
-      expect(facingWest.position.y).to eq(y2)
+      expect(facingWest.position.get_coordinates).to eq([x2-1,y2])
     end
   end
+
 
   describe "Test turn left function" do
     it "facing north" do
@@ -105,8 +103,7 @@ RSpec.describe Car do
     end
 
     it "return correct location" do
-      expect(facingWest.position.x).to eq(positionSec.x)
-      expect(facingWest.position.y).to eq(positionSec.y)
+      expect(facingWest.position.get_coordinates).to eq(positionSec.get_coordinates)
     end
 
     it "when direction is not valid" do
@@ -118,26 +115,28 @@ RSpec.describe Car do
 
     it 'do series commands' do
       facingNorth.stackCommands([:F,:F,:R,:F,:L,:F])
-      expect([facingNorth.position.x,facingNorth.position.y]).to eq([5,8])
+      expect(facingNorth.position.get_coordinates).to eq([5,8])
       expect(facingNorth.direction).to eq(:N)
     end
 
     it 'test for serises of "move forward" commands' do
       facingSouth.stackCommands([:F,:F])
-      expect([facingSouth.position.x,facingSouth.position.y]).to eq([0,-2])
+      expect(facingSouth.position.get_coordinates).to eq([0,-2])
       expect(facingSouth.direction).to eq(:S)
     end
 
     it 'test serises of "turn" commands' do
       facingWest.stackCommands([:R,:R,:L,:L,:L])
-      expect([facingWest.position.x,facingWest.position.y]).to eq([4,5])
+      expect(facingWest.position.get_coordinates).to eq([4,5])
       expect(facingWest.direction).to eq(:S)
     end
 
     it 'test for complicated commands' do
       facingEast.stackCommands([:F,:L,:F,:L,:F,:L,:F])
-      expect([facingEast.position.x,facingEast.position.y]).to eq([0,0])
+      expect(facingEast.position.get_coordinates).to eq([0,0])
       expect(facingEast.direction).to eq(:S)
     end
   end
+
+
 end

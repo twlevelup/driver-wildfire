@@ -6,4 +6,11 @@ def initialize(x,y)
 	@y = y
 end
 
+def get_coordinates
+	return [x,y]
 end
+
+
+end
+
+
