@@ -80,7 +80,77 @@ class Car
                 "Wrong Command"
             end
         end
-    end            
+    end
+
+    def move_to_location(destination)
+        commands = []
+        position = Position.new(@position.x, @position.y)
+        direction = @direction
+
+        # Handle x component
+        if position.x < destination.x
+            # should be facing east
+            case direction
+            when :N
+                commands.push(:R)
+            when :S
+                commands.push(:L)
+            when :W
+                commands.push(:R)
+                commands.push(:R)
+            end
+            direction = :E
+        elsif position.x > destination.x
+            # should be facing west
+            case direction
+            when :N
+                commands.push(:L)
+            when :S
+                commands.push(:R)
+            when :E
+                commands(:L)
+                commands(:L)
+            end
+            direction = :W
+        end
+
+        for x in 0...(position.x-destination.x).abs
+            commands.push(:F)
+        end
+
+        # handle y component
+        if position.y < destination.y
+            # should be facing north
+            case direction
+            when :E
+                commands.push(:L)
+            when :W
+                commands.push(:R)
+            when :S
+                commands.push(:L)
+                commands.push(:L)
+            end
+            direction = :N
+        elsif position.y > destination.y
+            # should be facing south
+            case direction
+            when :E
+                commands.push(:R)
+            when :W
+                commands.push(:L)
+            when :N
+                commands.push(:R)
+                commands.push(:R)
+            end
+            direction = :S
+        end
+
+        for y in 0...(position.y-destination.y).abs
+            commands.push(:F)
+        end
+
+        return stackCommands(commands)
+    end          
 end
 
 
