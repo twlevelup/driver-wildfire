@@ -17,21 +17,32 @@ class Car
 	end
 
     def move 
-
-        @temp_pos = @position
     	case @direction
     	when :N
-                @position.y += 1
+            if((@position.+(:y).is_valid?(@grid)))
+                return (@position.y += 1)
+            else
                 return @position
+            end
     	when :S
-    		@position.y -= 1
-            return @position
+            if((@position.-(:y).is_valid?(@grid)))
+                return (@position.y -= 1)
+            else
+                return @position
+            end
     	when :E
-    		@position.x += 1
-            return @position
+            if((@position.+(:x).is_valid?(@grid)))
+              return (@position.x += 1)
+            else
+                return @position
+            end
     	when :W
-    		@position.x -= 1
-            return @position
+            if((@position.+(:x).is_valid?(@grid)))
+    		  return (@position.x -= 1)
+            else
+                return @position
+            end
+
     	else
     		"Wrong initial direction"
     	end

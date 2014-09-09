@@ -11,7 +11,7 @@ class Position
 	end
 
 	def is_valid?(grid)
-			x>=grid.x_min && x<=grid.x_max && y>=grid.y_min && y<=grid.y_min
+			x>=grid.x_min && x<=grid.x_max && y>=grid.y_min && y<=grid.y_max
 	end
 
 	def +(xory)
@@ -20,6 +20,17 @@ class Position
 			return (Position.new(x+1,y))
 		when :y
 			return (Position.new(x,y+1))		
+		else
+			return
+		end
+	end
+
+	def -(xory)
+		case xory
+		when :x
+			return (Position.new(x-1,y))
+		when :y
+			return (Position.new(x,y-1))		
 		else
 			return
 		end

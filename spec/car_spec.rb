@@ -3,10 +3,10 @@ require 'position'
 require 'grid'
 RSpec.describe Car do
     let (:grid) {Grid.new(0,50,0,50)}
-    let (:x1) {0}
+    let (:x1) {3}
     let (:x2) {4}
     let (:x3) {-1}
-    let (:y1) {0}
+    let (:y1) {3}
     let (:y2) {5}
     let (:y3) {-2}
     let (:positionFirst) { Position.new(x1,y1)}
@@ -122,7 +122,7 @@ RSpec.describe Car do
 
     it 'test for serises of "move forward" commands' do
       facingSouth.stackCommands([:F,:F])
-      expect(facingSouth.position.get_coordinates).to eq([0,-2])
+      expect(facingSouth.position.get_coordinates).to eq([3,1])
       expect(facingSouth.direction).to eq(:S)
     end
 
@@ -134,7 +134,7 @@ RSpec.describe Car do
 
     it 'test for complicated commands' do
       facingEast.stackCommands([:F,:L,:F,:L,:F,:L,:F])
-      expect(facingEast.position.get_coordinates).to eq([0,0])
+      expect(facingEast.position.get_coordinates).to eq([3,3])
       expect(facingEast.direction).to eq(:S)
     end
   end
