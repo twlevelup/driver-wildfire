@@ -1,5 +1,6 @@
 require './lib/car'
-require './lib/position'      
+require './lib/position'
+require './lib/grid'       
 
 class CommandOperation
   attr_accessor :car
@@ -10,7 +11,7 @@ class CommandOperation
        if positionDirection.size() != 3
           raise ArgumentError, 'Please input initial location following this format (Location_X, Location_Y, Direction)'
        end
-       @car = Car.new(Position.new(positionDirection[0].to_i, positionDirection[1].to_i), positionDirection[2].upcase.to_sym)
+       @car = Car.new(Grid.new(0,50,0,50), Position.new(positionDirection[0].to_i, positionDirection[1].to_i), positionDirection[2].upcase.to_sym)
        @moveCommand = moveCommand.upcase
     end
   end
