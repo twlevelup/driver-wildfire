@@ -118,6 +118,7 @@ RSpec.describe Car do
       facingNorth.stack_commands([:F,:F,:R,:F,:L,:F])
       expect(facingNorth.position.get_coordinates).to eq([5,8])
       expect(facingNorth.direction).to eq(:N)
+      expect(facingNorth.car_status).to eq(0)
     end
 
     it 'test for serises of "move forward" commands' do
@@ -201,6 +202,7 @@ RSpec.describe Car do
     let (:destination_2)  {Position.new(57,30)}
     let (:destination_3)  {Position.new(10,-5)}
     let (:destination_4)  {Position.new(-4,7)}
+    let (:destination_5) {Position.new(60,60)}
     
     it 'should return boundary max_y coordinate if the destination y coord lies off the grid' do
       facingEast.move_to_location(destination_1)
@@ -222,6 +224,10 @@ RSpec.describe Car do
       expect(facingSouth.position.get_coordinates).to eq([0,7])
     end
 
+    it 'should return boundary max_y and max_y coordinate if the destination x and y coord lie off the grid' do
+      facingEast.move_to_location(destination_5)
+      expect(facingEast.position.get_coordinates).to eq([50,50])
+    end
   end
 end
 

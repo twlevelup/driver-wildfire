@@ -3,12 +3,15 @@ class Car
       attr_accessor :direction
 	  attr_accessor :position
       attr_accessor :grid
+      attr_accessor :car_status
     def initialize (index, grid, positionObject, direction)
 
         @grid = grid
         @position = positionObject
         @index = index
+        @car_status = 0 # 0-available , 1-not available
         
+        @position.status = 1
 		
         case direction
         when :N ,:S ,:E ,:W
@@ -21,7 +24,7 @@ class Car
     def move 
     	case @direction
     	when :N
-            if((@position.+(:y).is_valid?(@grid)))
+            if((@position.+(:y).is_valid?(@grid)) && (@position.+(:y).is_available?(@grid)))
                 return (@position.y += 1)
             else
                 return @position
@@ -93,12 +96,19 @@ class Car
                 "Wrong Command"
             end
         end
+        @car_status = 0
     end
 
     def move_to_location(destination)
         commands = []
         position = Position.new(@position.x, @position.y)
         direction = @direction
+        
+        if (@car_status == 0)
+            @car_status = 1
+        else 
+            return
+        end
 
         # Handle x component
         if position.x < destination.x
