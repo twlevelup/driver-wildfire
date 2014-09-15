@@ -5,7 +5,6 @@ class Position
 	def initialize(x,y)
 		@x = x
 		@y = y
-		@status = 0
 	end
 
 	def get_coordinates
@@ -14,6 +13,10 @@ class Position
 
 	def is_valid?(grid)
 		x>=grid.x_min && x<=grid.x_max && y>=grid.y_min && y<=grid.y_max
+	end
+
+	def set_available(grid)
+		grid.grid[x][y] = 0
 	end
 
 	def set_occupied(grid)

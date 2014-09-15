@@ -11,7 +11,7 @@ class Car
         @index = index
         @car_status = 0 # 0-available , 1-not available
         
-        @position.status = 1
+        @position.set_occupied(@grid)
 		
         case direction
         when :N ,:S ,:E ,:W
@@ -25,29 +25,36 @@ class Car
     	case @direction
     	when :N
             if((@position.+(:y).is_valid?(@grid)) && (@position.+(:y).is_available?(@grid)))
+                @position.+(:y).set_occupied(@grid)
+                @position.set_available(@grid)
                 return (@position.y += 1)
             else
                 return @position
             end
     	when :S
-            if((@position.-(:y).is_valid?(@grid)))
+            if((@position.-(:y).is_valid?(@grid)) && (@position.-(:y).is_available?(@grid)))
+                @position.-(:y).set_occupied(@grid)
+                @position.set_available(@grid)
                 return (@position.y -= 1)
             else
                 return @position
             end
     	when :E
-            if((@position.+(:x).is_valid?(@grid)))
-              return (@position.x += 1)
+            if((@position.+(:x).is_valid?(@grid)) && (@position.+(:x).is_available?(@grid)))
+                @position.+(:x).set_occupied(@grid)
+                @position.set_available(@grid)
+                return (@position.x += 1)
             else
                 return @position
             end
     	when :W
-            if((@position.-(:x).is_valid?(@grid)))
-    		  return (@position.x -= 1)
+            if((@position.-(:x).is_valid?(@grid)) && (@position.-(:x).is_available?(@grid)))
+                @position.-(:x).set_occupied(@grid)
+                @position.set_available(@grid)
+    		    return (@position.x -= 1)
             else
                 return @position
             end
-
     	else
     		"Wrong initial direction"
     	end
