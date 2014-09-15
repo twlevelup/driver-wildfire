@@ -12,11 +12,11 @@ RSpec.describe Car do
     let (:positionFirst) { Position.new(x1,y1)}
     let (:positionSec) { Position.new(x2,y2)}
     let (:positionThird) { Position.new(x3,y3)} 
-    let (:facingSouth) {Car.new(grid, positionFirst, :S)}
-    let (:facingEast)  {Car.new(grid, positionFirst, :E)}
-    let (:facingNorth)  {Car.new(grid, positionSec, :N)}
-    let (:facingWest)  {Car.new(grid, positionSec, :W)}
-    let (:facingWrongDirection) {Car.new(grid, positionFirst, :Start)}
+    let (:facingSouth) {Car.new(0, grid, positionFirst, :S)}
+    let (:facingEast)  {Car.new(0, grid, positionFirst, :E)}
+    let (:facingNorth)  {Car.new(0, grid, positionSec, :N)}
+    let (:facingWest)  {Car.new(0, grid, positionSec, :W)}
+    let (:facingWrongDirection) {Car.new(0, grid, positionFirst, :Start)}
   
   describe "Test move function" do
     it "facing north" do
@@ -194,6 +194,34 @@ RSpec.describe Car do
         expect(facingWest.direction).to eq(:S)
       end
      end
+  end
+
+  context 'testing operation within the grid boundary 0,50,0,50' do
+    let (:destination_1)  {Position.new(30,55)}
+    let (:destination_2)  {Position.new(57,30)}
+    let (:destination_3)  {Position.new(10,-5)}
+    let (:destination_4)  {Position.new(-4,7)}
+    
+    it 'should return boundary max_y coordinate if the destination y coord lies off the grid' do
+      facingEast.move_to_location(destination_1)
+      expect(facingEast.position.get_coordinates).to eq([30,50])
+    end
+
+    it 'should return boundary max_x coordinate if the destination x coord lies off the grid' do
+      facingNorth.move_to_location(destination_2)
+      expect(facingNorth.position.get_coordinates).to eq([50,30])
+    end
+
+    it 'should return boundary min_y coordinate if the destination y coord lies off the grid' do
+      facingWest.move_to_location(destination_3)
+      expect(facingWest.position.get_coordinates).to eq([10,0])
+    end
+
+    it 'should return boundary max_x coordinate if the destination x coord lies off the grid' do
+      facingSouth.move_to_location(destination_4)
+      expect(facingSouth.position.get_coordinates).to eq([0,7])
+    end
+
   end
 end
 

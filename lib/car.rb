@@ -1,11 +1,13 @@
 class Car
-    attr_accessor :direction
+      attr_accessor :index
+      attr_accessor :direction
 	  attr_accessor :position
       attr_accessor :grid
-    def initialize (grid, positionObject, direction)
+    def initialize (index, grid, positionObject, direction)
 
         @grid = grid
         @position = positionObject
+        @index = index
         
 		
         case direction
@@ -37,7 +39,7 @@ class Car
                 return @position
             end
     	when :W
-            if((@position.+(:x).is_valid?(@grid)))
+            if((@position.-(:x).is_valid?(@grid)))
     		  return (@position.x -= 1)
             else
                 return @position
