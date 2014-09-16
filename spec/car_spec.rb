@@ -238,9 +238,9 @@ RSpec.describe Car do
   end
 
 
-  it 'should print the grid' do
-    expect(grid.print_grid).to eq(true)
-  end
+  #it 'should print the grid' do
+  #  expect(grid.print_grid).to eq(true)
+  #end
 
 
 end
