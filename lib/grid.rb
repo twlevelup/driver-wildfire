@@ -3,6 +3,8 @@
 
 class Grid 
 
+	#Colorize = Color_Text.new
+
 	attr_accessor :x_min, :x_max, :y_min, :y_max
 	attr_accessor :grid;
 
@@ -17,7 +19,12 @@ class Grid
 	def print_grid
 		for i in 0...(y_max)
 			for j in 0...(x_max)
-				print @grid[i][j]
+				value = @grid[i][j]
+				#case value
+				#when 1					
+					print @grid[i][j]
+				#else
+				#end
 			end
 				puts
 		end

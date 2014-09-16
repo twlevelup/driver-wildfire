@@ -1,4 +1,4 @@
-class Colors
+class Color_Text
    def self.colorize(text, color_code)
      "\e[#{color_code}m#{text}\e[0m"
    end
@@ -7,6 +7,7 @@ class Colors
       case color.downcase
        when "red"
          colorize(text, 31)
+         return text
          
        when "green"
          colorize(text, 32)
