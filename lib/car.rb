@@ -28,34 +28,50 @@ class Car
     def move 
     	case @direction
     	when :N
-            if((@position.+(:y).is_valid?(@grid)) && (@position.+(:y).is_available?(@grid)))
-                @position.+(:y).set_occupied(@grid)
-                @position.set_available(@grid)
-                return (@position.y += 1)
+            if (@position.+(:y).is_valid?(@grid)) 
+                while (true) do
+                    if (@position.+(:y).is_available?(@grid))                        
+                        @position.+(:y).set_occupied(@grid)
+                        @position.set_available(@grid)
+                        return (@position.y += 1)
+                    end
+                end
             else
                 return @position
             end
     	when :S
-            if((@position.-(:y).is_valid?(@grid)) && (@position.-(:y).is_available?(@grid)))
-                @position.-(:y).set_occupied(@grid)
-                @position.set_available(@grid)
-                return (@position.y -= 1)
+            if (@position.-(:y).is_valid?(@grid)) 
+                while (true) do
+                    if (@position.-(:y).is_available?(@grid))
+                        @position.-(:y).set_occupied(@grid)
+                        @position.set_available(@grid)
+                        return (@position.y -= 1)
+                    end
+                end
             else
                 return @position
             end
     	when :E
-            if((@position.+(:x).is_valid?(@grid)) && (@position.+(:x).is_available?(@grid)))
-                @position.+(:x).set_occupied(@grid)
-                @position.set_available(@grid)
-                return (@position.x += 1)
+            if (@position.+(:x).is_valid?(@grid)) 
+                while (true) do
+                    if (@position.+(:x).is_available?(@grid))
+                        @position.+(:x).set_occupied(@grid)
+                        @position.set_available(@grid)
+                        return (@position.x += 1)
+                    end
+                end
             else
                 return @position
             end
     	when :W
-            if((@position.-(:x).is_valid?(@grid)) && (@position.-(:x).is_available?(@grid)))
-                @position.-(:x).set_occupied(@grid)
-                @position.set_available(@grid)
-    		    return (@position.x -= 1)
+            if (@position.-(:x).is_valid?(@grid)) 
+                while (true) do
+                    if (@position.-(:x).is_available?(@grid))
+                        @position.-(:x).set_occupied(@grid)
+                        @position.set_available(@grid)
+            		    return (@position.x -= 1)
+                    end
+                end
             else
                 return @position
             end
