@@ -22,8 +22,8 @@ class Position
 		grid.grid[y][x] = 0
 	end
 
-	def set_occupied(grid)
-		grid.grid[y][x] = 1
+	def set_occupied(grid, index)
+		grid.grid[y][x] = index
 	end
 
 
