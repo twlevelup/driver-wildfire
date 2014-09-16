@@ -29,8 +29,8 @@ class Car
                     if (@position.+(:y).is_available?(@grid))                        
                         @position.+(:y).set_occupied(@grid, @index)
                         @position.set_available(@grid)
-                       # puts "[#{@position.x},#{@position.y}]"
-                        return (@position.y += 1)
+                        @position.y += 1
+                        return @position
                     end
                 end
             else
@@ -42,20 +42,21 @@ class Car
                     if (@position.-(:y).is_available?(@grid))
                         @position.-(:y).set_occupied(@grid, @index)
                         @position.set_available(@grid)
-                        return (@position.y -= 1)
+                        @position.y -= 1
+                        return @position
                     end
                 end
             else
                 return @position
             end
-    	when :E
+        when :E
             if (@position.+(:x).is_valid?(@grid)) 
                 while (true) do
                     if (@position.+(:x).is_available?(@grid))
                         @position.+(:x).set_occupied(@grid, @index)
                         @position.set_available(@grid)
-                      #  puts "[#{@position.x},#{@position.y}]"
-                        return (@position.x += 1)
+                        @position.x += 1
+                        return @position
                     end
                 end
             else
@@ -66,9 +67,9 @@ class Car
                 while (true) do
                     if (@position.-(:x).is_available?(@grid))
                         @position.-(:x).set_occupied(@grid, @index)
-                        @position.set_available(@grid)
-                        
-            		    return (@position.x -= 1)
+                        @position.set_available(@grid)                      
+            		    @position.x -= 1
+                        return @position
                     end
                 end
             else
@@ -77,6 +78,7 @@ class Car
     	else
     		"Wrong initial direction"
     	end
+        #return location_array
     end
 
     def reverse
@@ -87,7 +89,8 @@ class Car
                     if (@position.-(:y).is_available?(@grid))                        
                         @position.-(:y).set_occupied(@grid, @index)
                         @position.set_available(@grid)
-                        return (@position.y -= 1)
+                        @position.y -= 1
+                        return @position
                     end
                 end
             else
@@ -99,7 +102,8 @@ class Car
                     if (@position.+(:y).is_available?(@grid))
                         @position.+(:y).set_occupied(@grid, @index)
                         @position.set_available(@grid)
-                        return (@position.y += 1)
+                        @position.y += 1
+                        return @position
                     end
                 end
             else
@@ -111,7 +115,8 @@ class Car
                     if (@position.-(:x).is_available?(@grid))
                         @position.-(:x).set_occupied(@grid, @index)
                         @position.set_available(@grid)
-                        return (@position.x -= 1)
+                        @position.x -= 1
+                        return @position
                     end
                 end
             else
@@ -123,7 +128,8 @@ class Car
                     if (@position.+(:x).is_available?(@grid))
                         @position.+(:x).set_occupied(@grid, @index)
                         @position.set_available(@grid)
-                        return (@position.x += 1)
+                        @position.x += 1
+                        return @position
                     end
                 end
             else
@@ -166,11 +172,14 @@ class Car
     end
 
     def stack_commands(commandList)
+        location_array = Array.new
+        current_position = Position.new(0,0)
         commandList.each do |item| 
             case item
             when :F
                 move()
-                puts "[#{@position.x},#{@position.y}]"
+                #puts "[#{@position.x},#{@position.y}]"
+                location_array.push("#{@position.x},#{@position.y}")
             when :L 
                 turn_left()
             when :R 
@@ -180,9 +189,11 @@ class Car
             end
         end
         @car_status = 0
+        return location_array
     end
 
     def move_to_location(destination)
+        location_array = Array.new
         commands = []
         position = Position.new(@position.x, @position.y)
         direction = @direction
@@ -255,7 +266,8 @@ class Car
             commands.push(:F)
         end
 
-        return stack_commands(commands)
+        location_array = stack_commands(commands)
+
     end          
 end
 

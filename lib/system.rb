@@ -50,11 +50,15 @@ class System
         end
 =======
   grid = Grid.new(0,50,0,50)
+  visual_grid = Grid.new(0,50,0,50)
   taxi_list = Array.new
   taxi_index = 1
   taxi = nil
   
-  
+  destination = Position.new(0,0)
+  location_array = Array.new
+  temp_location = Position.new(0,0)
+
   while true
     tag = true
     puts "Please input the commands..."
@@ -64,9 +68,9 @@ class System
         puts 'The system has been shut down.'
         exit
       when "help"
-        puts "Basic Commands: createtaxi"
+        puts "Basic Commands: create_taxi"
         puts "                destination"
-        puts "                creatgrid"
+        puts "                create_grid"
         puts "                taxi"
         puts "                givecommand"
       when "createtaxi"
@@ -81,6 +85,7 @@ class System
               puts "Taxi #{taxi.index} : #{taxi.position.x} , #{taxi.position.y}  "
               taxi_list << taxi
               position.set_occupied(grid, taxi_index)
+              position.set_occupied(visual_grid, taxi_index)
               taxi_index += 1              
               tag = false
           else
@@ -100,16 +105,30 @@ class System
           puts "taxi: #{item.index}"
         end
       when "showgrid"
-        grid.print_grid
+        #grid.print_grid
+        puts "Visual Grid"
+        visual_grid.print_grid
       when "move_to"
         puts "Please input the taxi number : "
-        number = gets.chomp().to_i;
+        taxi_number = gets.chomp().to_i;
         puts "Please enter the destination... eg.(10,15)"
         dest = gets.chomp().split(',')
-        destination = Position.new(dest[0].to_i,dest[1].to_i)
-        current_taxi = taxi_list[number-1]
+        destination.set_coordinates(dest[0].to_i,dest[1].to_i)
+        current_taxi = taxi_list[taxi_number-1]
+
+        puts "The locations passes by the car : "
         puts "[#{current_taxi.position.x},#{current_taxi.position.y}]"
-        current_taxi.move_to_location(destination)
+        
+        location_array.clear
+        location_array = current_taxi.move_to_location(destination)
+       
+        location_array.each do |item| 
+          item = item.split(',')
+          puts "[#{item[0].to_i},#{item[1].to_i}]"
+          temp_location.set_coordinates(item[0].to_i, item[1].to_i)
+          temp_location.set_occupied(visual_grid, taxi_number)
+        end
+
       end
 >>>>>>> 2b2e75d00210a05790719f7247a13062df038025
 

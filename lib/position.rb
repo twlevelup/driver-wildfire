@@ -10,6 +10,11 @@ class Position
 		return [x,y]
 	end
 
+	def set_coordinates(x,y)
+		@x = x
+		@y = y
+	end
+
 	def is_valid?(grid)
 		x>=grid.x_min && x<grid.x_max && y>=grid.y_min && y<grid.y_max
 	end
