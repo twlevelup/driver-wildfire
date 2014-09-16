@@ -6,7 +6,7 @@ begin
 
   grid = Grid.new(0,50,0,50)
   taxi_list = Array.new
-  taxi_index = 0
+  taxi_index = 1
   taxi = nil
   
   
@@ -16,7 +16,8 @@ begin
     msg = gets.chomp
     case msg 
       when "exit"
-        raise ArgumentError, 'The system has been shut down.'
+        puts 'The system has been shut down.'
+        exit
       when "help"
         puts "Basic Commands: createtaxi"
         puts "                destination"
@@ -29,13 +30,13 @@ begin
           initial_arguments = gets.chomp.split(',')
           position = Position.new(initial_arguments[0].to_i,initial_arguments[1].to_i)
 
-          if(position.is_available?(grid))
+          if(position.is_valid?(grid) && position.is_available?(grid))
               taxi = Car.new(taxi_index, grid, position, initial_arguments[2].upcase.to_sym)
               puts "Taxi #{taxi_index} has been created successfully."
               puts "Taxi #{taxi.index} : #{taxi.position.x} , #{taxi.position.y}  "
               taxi_list << taxi
-              taxi_index += 1
               position.set_occupied(grid, taxi_index)
+              taxi_index += 1              
               tag = false
           else
             puts "The taxi lacation is already been taken... Please give another location"
@@ -55,7 +56,16 @@ begin
         end
       when "showgrid"
         grid.print_grid
-    end
+      when "move_to"
+        puts "Please input the taxi number : "
+        number = gets.chomp().to_i;
+        puts "Please enter the destination... eg.(10,15)"
+        dest = gets.chomp().split(',')
+        destination = Position.new(dest[0].to_i,dest[1].to_i)
+        current_taxi = taxi_list[number-1]
+        puts "[#{current_taxi.position.x},#{current_taxi.position.y}]"
+        current_taxi.move_to_location(destination)
+      end
 
 
   end
