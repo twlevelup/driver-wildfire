@@ -4,10 +4,10 @@ class Car
 	  attr_accessor :position
       attr_accessor :grid
       attr_accessor :car_status
-    def initialize (index, grid, positionObject, direction)
+    def initialize (index, grid, position_object, direction)
 
         @grid = grid
-        @position = positionObject
+        @position = position_object
         @index = index
         @car_status = 0 # 0-available , 1-not available
         
