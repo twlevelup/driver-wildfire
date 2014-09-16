@@ -11,7 +11,11 @@ class Car
         @index = index
         @car_status = 0 # 0-available , 1-not available
         
-        @position.set_occupied(@grid)
+       # if(@position.is_available?(@grid))
+            @position.set_occupied(@grid)
+       # else
+       #     puts "car #{@index} cannot be created, position already occupied"
+       # end
 		
         case direction
         when :N ,:S ,:E ,:W
@@ -90,7 +94,7 @@ class Car
         end
     end
 
-    def stack_commands (commandList)
+    def stack_commands(commandList)
         commandList.each do |item| 
             case item
             when :F

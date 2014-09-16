@@ -3,6 +3,8 @@ require 'position'
 require 'grid'
 RSpec.describe Car do
     let (:grid) {Grid.new(0,50,0,50)}
+    let (:car_0) {Car.new(0, grid, Position.new(4,4), :N)}
+    let (:car_1) {Car.new(1, grid, Position.new(4,4), :N)}
     let (:x1) {3}
     let (:x2) {4}
     let (:x3) {-1}
@@ -206,12 +208,12 @@ RSpec.describe Car do
     
     it 'should return boundary max_y coordinate if the destination y coord lies off the grid' do
       facing_east.move_to_location(destination_1)
-      expect(facing_east.position.get_coordinates).to eq([30,50])
+      expect(facing_east.position.get_coordinates).to eq([30,49])
     end
 
     it 'should return boundary max_x coordinate if the destination x coord lies off the grid' do
       facing_north.move_to_location(destination_2)
-      expect(facing_north.position.get_coordinates).to eq([50,30])
+      expect(facing_north.position.get_coordinates).to eq([49,30])   
     end
 
     it 'should return boundary min_y coordinate if the destination y coord lies off the grid' do
@@ -226,8 +228,20 @@ RSpec.describe Car do
 
     it 'should return boundary max_y and max_y coordinate if the destination x and y coord lie off the grid' do
       facing_east.move_to_location(destination_5)
-      expect(facing_east.position.get_coordinates).to eq([50,50])
+      expect(facing_east.position.get_coordinates).to eq([49,49])
     end
   end
+
+  context 'testing for two cars' do
+    #let (:car_0) {Car.new(0, grid, Position.new(4,4), :N)}
+    #let (:car_1) {Car.new(1, grid, Position.new(4,4), :N)}
+  end
+
+
+  it 'should print the grid' do
+    expect(grid.print_grid).to eq(true)
+  end
+
+
 end
 
