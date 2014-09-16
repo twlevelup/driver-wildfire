@@ -9,134 +9,134 @@ RSpec.describe Car do
     let (:y1) {3}
     let (:y2) {5}
     let (:y3) {-2}
-    let (:positionFirst) { Position.new(x1,y1)}
-    let (:positionSec) { Position.new(x2,y2)}
-    let (:positionThird) { Position.new(x3,y3)} 
-    let (:facingSouth) {Car.new(0, grid, positionFirst, :S)}
-    let (:facingEast)  {Car.new(0, grid, positionFirst, :E)}
-    let (:facingNorth)  {Car.new(0, grid, positionSec, :N)}
-    let (:facingWest)  {Car.new(0, grid, positionSec, :W)}
-    let (:facingWrongDirection) {Car.new(0, grid, positionFirst, :Start)}
+    let (:position_first) { Position.new(x1,y1)}
+    let (:position_sec) { Position.new(x2,y2)}
+    let (:position_third) { Position.new(x3,y3)}
+    let (:facing_south) {Car.new(0, grid, position_first, :S)}
+    let (:facing_east)  {Car.new(0, grid, position_first, :E)}
+    let (:facing_north)  {Car.new(0, grid, position_sec, :N)}
+    let (:facing_west)  {Car.new(0, grid, position_sec, :W)}
+    let (:facing_wrong_direction) {Car.new(0, grid, position_first, :Start)}
   
   describe "Test move function" do
     it "facing north" do
-      facingNorth.move
-      expect(facingNorth.position.get_coordinates).to eq([x2, y2+1])
+      facing_north.move
+      expect(facing_north.position.get_coordinates).to eq([x2, y2+1])
     end
 
     it "facing south" do 
-      facingSouth.move
-      expect(facingSouth.position.get_coordinates).to eq([x1, y1-1])
+      facing_south.move
+      expect(facing_south.position.get_coordinates).to eq([x1, y1-1])
     end
 
     it "facing east" do 
-      facingEast.move
-      expect(facingEast.position.get_coordinates).to eq([x1+1, y1])
+      facing_east.move
+      expect(facing_east.position.get_coordinates).to eq([x1+1, y1])
     end
 
     it "facing west" do
-      facingWest.move
-      expect(facingWest.position.get_coordinates).to eq([x2-1,y2])
+      facing_west.move
+      expect(facing_west.position.get_coordinates).to eq([x2-1,y2])
     end
   end
 
 
   describe "Test turn left function" do
     it "facing north" do
-      facingNorth.turn_left
-      expect(facingNorth.direction).to eq(:W)
+      facing_north.turn_left
+      expect(facing_north.direction).to eq(:W)
     end
 
     it "facing south" do
-      facingSouth.turn_left
-      expect(facingSouth.direction).to eq(:E)
+      facing_south.turn_left
+      expect(facing_south.direction).to eq(:E)
     end
 
     it "facing west" do
-      facingWest.turn_left
-      expect(facingWest.direction).to eq(:S)
+      facing_west.turn_left
+      expect(facing_west.direction).to eq(:S)
     end
 
     it "facing east" do
-      facingEast.turn_left
-      expect(facingEast.direction).to eq(:N)
+      facing_east.turn_left
+      expect(facing_east.direction).to eq(:N)
     end
 
     it "facing wrong direction" do
-      facingWrongDirection.turn_left
-      expect(facingWrongDirection.direction).to eq("Wrong initial direction")
+      facing_wrong_direction.turn_left
+      expect(facing_wrong_direction.direction).to eq("Wrong initial direction")
     end
   end
 
   describe "Test turn right function" do
     it "facing north" do
-      facingNorth.turn_right
-      expect(facingNorth.direction).to eq(:E)
+      facing_north.turn_right
+      expect(facing_north.direction).to eq(:E)
     end
 
     it "facing south" do
-      facingSouth.turn_right
-      expect(facingSouth.direction).to eq(:W)
+      facing_south.turn_right
+      expect(facing_south.direction).to eq(:W)
     end
 
     it "facing west" do
-      facingWest.turn_right
-      expect(facingWest.direction).to eq(:N)
+      facing_west.turn_right
+      expect(facing_west.direction).to eq(:N)
     end
 
     it "facing east" do
-      facingEast.turn_right
-      expect(facingEast.direction).to eq(:S)
+      facing_east.turn_right
+      expect(facing_east.direction).to eq(:S)
     end
 
     it "facing wrong direction" do
-      facingWrongDirection.turn_left
-      expect(facingWrongDirection.direction).to eq("Wrong initial direction")
+      facing_wrong_direction.turn_left
+      expect(facing_wrong_direction.direction).to eq("Wrong initial direction")
     end
   end
 
   describe "Test get direction function and get location function" do 
     it "return correct direction" do
-      expect(facingWest.direction).to eq(:W)
-      expect(facingEast.direction).to eq(:E)
-      expect(facingSouth.direction).to eq(:S)
-      expect(facingNorth.direction).to eq(:N)
+      expect(facing_west.direction).to eq(:W)
+      expect(facing_east.direction).to eq(:E)
+      expect(facing_south.direction).to eq(:S)
+      expect(facing_north.direction).to eq(:N)
     end
 
     it "return correct location" do
-      expect(facingWest.position.get_coordinates).to eq(positionSec.get_coordinates)
+      expect(facing_west.position.get_coordinates).to eq(position_sec.get_coordinates)
     end
 
     it "when direction is not valid" do
-      expect(facingWrongDirection.direction).to eq("Wrong initial direction")
+      expect(facing_wrong_direction.direction).to eq("Wrong initial direction")
     end
   end
 
   describe "test for stack commands function" do
 
     it 'do series commands' do
-      facingNorth.stack_commands([:F,:F,:R,:F,:L,:F])
-      expect(facingNorth.position.get_coordinates).to eq([5,8])
-      expect(facingNorth.direction).to eq(:N)
-      expect(facingNorth.car_status).to eq(0)
+      facing_north.stack_commands([:F,:F,:R,:F,:L,:F])
+      expect(facing_north.position.get_coordinates).to eq([5,8])
+      expect(facing_north.direction).to eq(:N)
+      expect(facing_north.car_status).to eq(0)
     end
 
     it 'test for serises of "move forward" commands' do
-      facingSouth.stack_commands([:F,:F])
-      expect(facingSouth.position.get_coordinates).to eq([3,1])
-      expect(facingSouth.direction).to eq(:S)
+      facing_south.stack_commands([:F,:F])
+      expect(facing_south.position.get_coordinates).to eq([3,1])
+      expect(facing_south.direction).to eq(:S)
     end
 
     it 'test serises of "turn" commands' do
-      facingWest.stack_commands([:R,:R,:L,:L,:L])
-      expect(facingWest.position.get_coordinates).to eq([4,5])
-      expect(facingWest.direction).to eq(:S)
+      facing_west.stack_commands([:R,:R,:L,:L,:L])
+      expect(facing_west.position.get_coordinates).to eq([4,5])
+      expect(facing_west.direction).to eq(:S)
     end
 
     it 'test for complicated commands' do
-      facingEast.stack_commands([:F,:L,:F,:L,:F,:L,:F])
-      expect(facingEast.position.get_coordinates).to eq([3,3])
-      expect(facingEast.direction).to eq(:S)
+      facing_east.stack_commands([:F,:L,:F,:L,:F,:L,:F])
+      expect(facing_east.position.get_coordinates).to eq([3,3])
+      expect(facing_east.direction).to eq(:S)
     end
   end
 
@@ -146,53 +146,53 @@ RSpec.describe Car do
 
     context 'reaching to a north-east destination' do
       it 'reaching when the car is facing north' do
-        facingNorth.move_to_location(destination_1)
-        expect(facingNorth.position.get_coordinates).to eq(destination_1.get_coordinates)
-        expect(facingNorth.direction).to eq(:N)
+        facing_north.move_to_location(destination_1)
+        expect(facing_north.position.get_coordinates).to eq(destination_1.get_coordinates)
+        expect(facing_north.direction).to eq(:N)
       end
 
       it 'reaching when the car is facing south' do
-        facingSouth.move_to_location(destination_1)
-        expect(facingSouth.position.get_coordinates).to eq(destination_1.get_coordinates)
-        expect(facingSouth.direction).to eq(:N)
+        facing_south.move_to_location(destination_1)
+        expect(facing_south.position.get_coordinates).to eq(destination_1.get_coordinates)
+        expect(facing_south.direction).to eq(:N)
       end
 
       it 'reaching when the car is facing east' do
-        facingEast.move_to_location(destination_1)
-        expect(facingEast.position.get_coordinates).to eq(destination_1.get_coordinates)
-        expect(facingEast.direction).to eq(:N)
+        facing_east.move_to_location(destination_1)
+        expect(facing_east.position.get_coordinates).to eq(destination_1.get_coordinates)
+        expect(facing_east.direction).to eq(:N)
       end
 
       it 'reaching when the car is facing west' do
-        facingWest.move_to_location(destination_1)
-        expect(facingWest.position.get_coordinates).to eq(destination_1.get_coordinates)
-        expect(facingWest.direction).to eq(:N)
+        facing_west.move_to_location(destination_1)
+        expect(facing_west.position.get_coordinates).to eq(destination_1.get_coordinates)
+        expect(facing_west.direction).to eq(:N)
       end
     end
 
     context 'reaching to a south_west destination' do
       it 'reaching when the car is facing north' do
-        facingNorth.move_to_location(destination_2)
-        expect(facingNorth.position.get_coordinates).to eq(destination_2.get_coordinates)
-        expect(facingNorth.direction).to eq(:S)
+        facing_north.move_to_location(destination_2)
+        expect(facing_north.position.get_coordinates).to eq(destination_2.get_coordinates)
+        expect(facing_north.direction).to eq(:S)
       end
 
       it 'reaching when the car is facing south' do
-        facingSouth.move_to_location(destination_2)
-        expect(facingSouth.position.get_coordinates).to eq(destination_2.get_coordinates)
-        expect(facingSouth.direction).to eq(:S)
+        facing_south.move_to_location(destination_2)
+        expect(facing_south.position.get_coordinates).to eq(destination_2.get_coordinates)
+        expect(facing_south.direction).to eq(:S)
       end
 
       it 'reaching when the car is facing east' do
-        facingEast.move_to_location(destination_2)
-        expect(facingEast.position.get_coordinates).to eq(destination_2.get_coordinates)
-        expect(facingEast.direction).to eq(:S)
+        facing_east.move_to_location(destination_2)
+        expect(facing_east.position.get_coordinates).to eq(destination_2.get_coordinates)
+        expect(facing_east.direction).to eq(:S)
       end
 
       it 'reaching when the car is facing west' do
-        facingWest.move_to_location(destination_2)
-        expect(facingWest.position.get_coordinates).to eq(destination_2.get_coordinates)
-        expect(facingWest.direction).to eq(:S)
+        facing_west.move_to_location(destination_2)
+        expect(facing_west.position.get_coordinates).to eq(destination_2.get_coordinates)
+        expect(facing_west.direction).to eq(:S)
       end
      end
   end
@@ -205,28 +205,28 @@ RSpec.describe Car do
     let (:destination_5) {Position.new(60,60)}
     
     it 'should return boundary max_y coordinate if the destination y coord lies off the grid' do
-      facingEast.move_to_location(destination_1)
-      expect(facingEast.position.get_coordinates).to eq([30,50])
+      facing_east.move_to_location(destination_1)
+      expect(facing_east.position.get_coordinates).to eq([30,50])
     end
 
     it 'should return boundary max_x coordinate if the destination x coord lies off the grid' do
-      facingNorth.move_to_location(destination_2)
-      expect(facingNorth.position.get_coordinates).to eq([50,30])
+      facing_north.move_to_location(destination_2)
+      expect(facing_north.position.get_coordinates).to eq([50,30])
     end
 
     it 'should return boundary min_y coordinate if the destination y coord lies off the grid' do
-      facingWest.move_to_location(destination_3)
-      expect(facingWest.position.get_coordinates).to eq([10,0])
+      facing_west.move_to_location(destination_3)
+      expect(facing_west.position.get_coordinates).to eq([10,0])
     end
 
     it 'should return boundary max_x coordinate if the destination x coord lies off the grid' do
-      facingSouth.move_to_location(destination_4)
-      expect(facingSouth.position.get_coordinates).to eq([0,7])
+      facing_south.move_to_location(destination_4)
+      expect(facing_south.position.get_coordinates).to eq([0,7])
     end
 
     it 'should return boundary max_y and max_y coordinate if the destination x and y coord lie off the grid' do
-      facingEast.move_to_location(destination_5)
-      expect(facingEast.position.get_coordinates).to eq([50,50])
+      facing_east.move_to_location(destination_5)
+      expect(facing_east.position.get_coordinates).to eq([50,50])
     end
   end
 end
