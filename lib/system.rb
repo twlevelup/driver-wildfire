@@ -6,9 +6,10 @@ require './colors'
 require './CommandOperation'
 #class System
 begin
-
-  grid = Grid.new(0,50,0,50)
-  visual_grid = Grid.new(0,50,0,50)
+  grid = nil
+  visual_grid = nil
+  # grid = Grid.new(0,50,0,50)
+  # visual_grid = Grid.new(0,50,0,50)
   taxi_list = Array.new
   taxi_index = 1
   taxi = nil
@@ -16,7 +17,8 @@ begin
   destination = Position.new(0,0)
   location_array = Array.new
   temp_location = Position.new(0,0)
-
+  command_filter = CommandOperation.new
+  
   while true
     tag = true
     puts "Please input the commands..."
@@ -37,7 +39,7 @@ begin
         while (tag == true)
           puts "Please define the arguments for taxi (x,y,direction)..."
           initial_arguments = gets.chomp
-          command_filter = CommandOperation.new
+          
           while (!command_filter.create_taxi_command_is_valid?(initial_arguments))
             initial_arguments = gets.chomp
           end
@@ -60,9 +62,14 @@ begin
         end
         
       when "create_grid"
-        puts "Please input the arguments for grid... eg.(0,30,0,30)"
-        grid_arguments = gets.chomp().split(',')
+        puts "Please input the arguments for grid as the format(x_min,x_max,y_min,y_max)... eg.(0,30,0,30)"
+        grid_command = gets.chomp()
+        while !command_filter.create_grid_command_is_valid?(grid_command)
+          grid_command = gets.chomp()
+        end
+        grid_arguments = grid_command.split(',')
         grid = Grid.new(grid_arguments[0].to_i,grid_arguments[1].to_i,grid_arguments[2].to_i,grid_arguments[3].to_i)
+        visual_grid = Grid.new(grid_arguments[0].to_i,grid_arguments[1].to_i,grid_arguments[2].to_i,grid_arguments[3].to_i)
         grid.print_grid
         puts "Grid has been successfully created #{}"
       when "taxishow"
