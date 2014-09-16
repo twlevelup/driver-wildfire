@@ -1,21 +1,27 @@
-require './lib/car'
-require './lib/position'
-require './lib/grid'       
+       
 
 
 class CommandOperation
-  attr_accessor :car
-  attr_accessor :move_commands
-  attr_accessor :car_index
-  def initialize(initial_arguments, move_commands)
-    @car_index = 0
-    @car = Car.new(@car_index, Grid.new(0,50,0,50), Position.new(initial_arguments[0].to_i, initial_arguments[1].to_i), initial_arguments[2].upcase.to_sym)
-    @move_commands = move_commands.upcase
+  
+  def initialize()
+    
   end
   
-  def get_location()
-     
-     car.stack_commands(@move_commands.each_char.to_a.map &:to_sym)
-     return "New location: (#{@car.position.x} , #{@car.position.y}), facing to #{@car.direction.to_s}" 
+  def create_taxi_command_is_valid?(commands)
+ 
+    initial_arguments = commands.split(",")
+    
+      if initial_arguments.size() != 3
+        puts "Please input the correct number of arguments"
+        return false
+      elsif (initial_arguments[0] =~/\D/ || initial_arguments[1] =~/\D/)
+        puts "The location arguments just can be integer."
+        return false
+      elsif initial_arguments[2] =~ /[^ESWNeswn]/
+        puts "The direciton arguments just can be N,S,W,E"
+        return false
+      else
+        return true
+      end
   end
 end

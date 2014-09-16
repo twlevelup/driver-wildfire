@@ -3,6 +3,7 @@ require './car'
 require './grid'
 require './position'
 require './colors'
+require './CommandOperation'
 #class System
 begin
 
@@ -25,19 +26,26 @@ begin
         puts 'The system has been shut down.'
         exit
       when "help"
-        puts "Basic Commands: create_taxi"
-        puts "                destination"
-        puts "                create_grid"
-        puts "                taxi"
-        puts "                givecommand"
-      when "createtaxi"
+        puts "The most commonly Basic Commands are:"
+        puts "  create_grid       add a grid for the system, define the boundary of movement."
+        puts "  create_taxi       add a taxi to the system, the system will automatically generate an index for the taxi."
+        puts "  show_grid         show taxis' locations and their index number on the grid."
+        puts "  show_path         show the path of the taxi move to the destination."
+        puts "  show_taxi         show the list of current_taxi and their status, location, ID and facing direction."
+        puts "  move_taxi         move a taxi to another location."
+      when "create_taxi"
         while (tag == true)
           puts "Please define the arguments for taxi (x,y,direction)..."
-          initial_arguments = gets.chomp.split(',')
-          position = Position.new(initial_arguments[0].to_i,initial_arguments[1].to_i)
+          initial_arguments = gets.chomp
+          command_filter = CommandOperation.new
+          while (!command_filter.create_taxi_command_is_valid?(initial_arguments))
+            initial_arguments = gets.chomp
+          end
+          taxi_arguments = initial_arguments.split(',')
+          position = Position.new(taxi_arguments[0].to_i,taxi_arguments[1].to_i)
 
           if(position.is_valid?(grid) && position.is_available?(grid))
-              taxi = Car.new(taxi_index, grid, position, initial_arguments[2].upcase.to_sym)
+              taxi = Car.new(taxi_index, grid, position, taxi_arguments[2].upcase.to_sym)
               puts "Taxi #{taxi_index} has been created successfully."
               puts "Taxi #{taxi.index} : #{taxi.position.x} , #{taxi.position.y}  "
               taxi_list << taxi
@@ -51,8 +59,8 @@ begin
           end
         end
         
-      when "creategrid"
-        puts "Please input the arguments for grid"
+      when "create_grid"
+        puts "Please input the arguments for grid... eg.(0,30,0,30)"
         grid_arguments = gets.chomp().split(',')
         grid = Grid.new(grid_arguments[0].to_i,grid_arguments[1].to_i,grid_arguments[2].to_i,grid_arguments[3].to_i)
         grid.print_grid
