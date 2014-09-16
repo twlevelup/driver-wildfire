@@ -11,18 +11,14 @@ class Car
         @index = index
         @car_status = 0 # 0-available , 1-not available
         
-       # if(@position.is_available?(@grid))
-            @position.set_occupied(@grid)
-       # else
-       #     puts "car #{@index} cannot be created, position already occupied"
-       # end
-		
         case direction
         when :N ,:S ,:E ,:W
             @direction = direction
         else
             @direction = "Wrong initial direction"
         end
+
+        
 	end
 
     def move 
@@ -31,8 +27,9 @@ class Car
             if (@position.+(:y).is_valid?(@grid)) 
                 while (true) do
                     if (@position.+(:y).is_available?(@grid))                        
-                        @position.+(:y).set_occupied(@grid)
+                        @position.+(:y).set_occupied(@grid, @index)
                         @position.set_available(@grid)
+                       # puts "[#{@position.x},#{@position.y}]"
                         return (@position.y += 1)
                     end
                 end
@@ -43,7 +40,7 @@ class Car
             if (@position.-(:y).is_valid?(@grid)) 
                 while (true) do
                     if (@position.-(:y).is_available?(@grid))
-                        @position.-(:y).set_occupied(@grid)
+                        @position.-(:y).set_occupied(@grid, @index)
                         @position.set_available(@grid)
                         return (@position.y -= 1)
                     end
@@ -55,8 +52,9 @@ class Car
             if (@position.+(:x).is_valid?(@grid)) 
                 while (true) do
                     if (@position.+(:x).is_available?(@grid))
-                        @position.+(:x).set_occupied(@grid)
+                        @position.+(:x).set_occupied(@grid, @index)
                         @position.set_available(@grid)
+                      #  puts "[#{@position.x},#{@position.y}]"
                         return (@position.x += 1)
                     end
                 end
@@ -67,8 +65,9 @@ class Car
             if (@position.-(:x).is_valid?(@grid)) 
                 while (true) do
                     if (@position.-(:x).is_available?(@grid))
-                        @position.-(:x).set_occupied(@grid)
+                        @position.-(:x).set_occupied(@grid, @index)
                         @position.set_available(@grid)
+                        
             		    return (@position.x -= 1)
                     end
                 end
@@ -81,59 +80,58 @@ class Car
     end
 
     def reverse
-
         case @direction
-            when :N
-                if (@position.-(:y).is_valid?(@grid)) 
-                    while (true) do
-                        if (@position.-(:y).is_available?(@grid))                        
-                            @position.-(:y).set_occupied(@grid)
-                            @position.set_available(@grid)
-                            return (@position.y -= 1)
-                        end
+        when :N
+            if (@position.-(:y).is_valid?(@grid)) 
+                while (true) do
+                    if (@position.-(:y).is_available?(@grid))                        
+                        @position.-(:y).set_occupied(@grid, @index)
+                        @position.set_available(@grid)
+                        return (@position.y -= 1)
                     end
-                else
-                    return @position
-                end
-            when :S
-                if (@position.+(:y).is_valid?(@grid)) 
-                    while (true) do
-                        if (@position.+(:y).is_available?(@grid))
-                            @position.+(:y).set_occupied(@grid)
-                            @position.set_available(@grid)
-                            return (@position.y += 1)
-                        end
-                    end
-                else
-                    return @position
-                end
-            when :E
-                if (@position.-(:x).is_valid?(@grid)) 
-                    while (true) do
-                        if (@position.-(:x).is_available?(@grid))
-                            @position.-(:x).set_occupied(@grid)
-                            @position.set_available(@grid)
-                            return (@position.x -= 1)
-                        end
-                    end
-                else
-                    return @position
-                end
-            when :W
-                if (@position.+(:x).is_valid?(@grid)) 
-                    while (true) do
-                        if (@position.+(:x).is_available?(@grid))
-                            @position.+(:x).set_occupied(@grid)
-                            @position.set_available(@grid)
-                            return (@position.x += 1)
-                        end
-                    end
-                else
-                    return @position
                 end
             else
-                "Wrong initial direction"
+                return @position
             end
+        when :S
+            if (@position.+(:y).is_valid?(@grid)) 
+                while (true) do
+                    if (@position.+(:y).is_available?(@grid))
+                        @position.+(:y).set_occupied(@grid, @index)
+                        @position.set_available(@grid)
+                        return (@position.y += 1)
+                    end
+                end
+            else
+                return @position
+            end
+        when :E
+            if (@position.-(:x).is_valid?(@grid)) 
+                while (true) do
+                    if (@position.-(:x).is_available?(@grid))
+                        @position.-(:x).set_occupied(@grid, @index)
+                        @position.set_available(@grid)
+                        return (@position.x -= 1)
+                    end
+                end
+            else
+                return @position
+            end
+        when :W
+            if (@position.+(:x).is_valid?(@grid)) 
+                while (true) do
+                    if (@position.+(:x).is_available?(@grid))
+                        @position.+(:x).set_occupied(@grid, @index)
+                        @position.set_available(@grid)
+                        return (@position.x += 1)
+                    end
+                end
+            else
+                return @position
+            end
+        else
+            "Wrong initial direction"
+        end
     end
 
 
@@ -172,6 +170,7 @@ class Car
             case item
             when :F
                 move()
+                puts "[#{@position.x},#{@position.y}]"
             when :L 
                 turn_left()
             when :R 
