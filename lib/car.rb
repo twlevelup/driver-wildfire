@@ -11,18 +11,14 @@ class Car
         @index = index
         @car_status = 0 # 0-available , 1-not available
         
-        if(@position.is_available?(@grid))
-            @position.set_occupied(@grid, @index)
-        else
-            puts "car #{@index} cannot be created, position already occupied"
-        end
-		
         case direction
         when :N ,:S ,:E ,:W
             @direction = direction
         else
             @direction = "Wrong initial direction"
         end
+
+        
 	end
 
     def move 

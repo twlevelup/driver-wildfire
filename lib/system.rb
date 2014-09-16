@@ -4,12 +4,14 @@ require './position'
 
 begin
 
-  grid = nil
+  grid = Grid.new(0,50,0,50)
   taxi_list = Array.new
   taxi_index = 0
   taxi = nil
   
+  
   while true
+    tag = true
     puts "Please input the commands..."
     msg = gets.chomp
     case msg 
@@ -22,13 +24,25 @@ begin
         puts "                taxi"
         puts "                givecommand"
       when "createtaxi"
-        puts "Please define the arguments for taxi (x,y,direction)..."
-        initial_arguments = gets.chomp.split(',')
-        taxi = Car.new(taxi_index,grid,Position.new(initial_arguments[0].to_i,initial_arguments[1].to_i),initial_arguments[2].upcase.to_sym)
-        puts "Taxi #{taxi_index} has been created successfully."
-        puts "Taxi #{taxi.index} : #{taxi.position.x} , #{taxi.position.y}  "
-        taxi_list << taxi
-        taxi_index += 1
+        while (tag == true)
+          puts "Please define the arguments for taxi (x,y,direction)..."
+          initial_arguments = gets.chomp.split(',')
+          position = Position.new(initial_arguments[0].to_i,initial_arguments[1].to_i)
+
+          if(position.is_available?(grid))
+              taxi = Car.new(taxi_index, grid, position, initial_arguments[2].upcase.to_sym)
+              puts "Taxi #{taxi_index} has been created successfully."
+              puts "Taxi #{taxi.index} : #{taxi.position.x} , #{taxi.position.y}  "
+              taxi_list << taxi
+              taxi_index += 1
+              position.set_occupied(grid, taxi_index)
+              tag = false
+          else
+            puts "The taxi lacation is already been taken... Please give another location"
+              tag = true
+          end
+        end
+        
       when "creategrid"
         puts "Please input the arguments for grid"
         grid_arguments = gets.chomp().split(',')
