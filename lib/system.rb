@@ -21,9 +21,24 @@ begin
   temp_location = Position.new(0,0)
   command_filter = CommandOperation.new
   
+  system "cls"
+
   while true
     tag = true
-    puts "Please input the commands..."
+    puts Color_Text.change_color("               ======================================================", "green")
+    puts Color_Text.change_color("                           WILDFIRE AUTOMATED TAXI SERVICE", "cyan")
+    puts Color_Text.change_color("               ======================================================", "green")
+    puts Color_Text.change_color("                                     OPTIONS", "red")
+    puts Color_Text.change_color("                                 1. create_grid", "yellow")
+    puts Color_Text.change_color("                                 2. create_taxi", "yellow")
+    puts Color_Text.change_color("                                 3. move_taxi", "yellow")
+    puts Color_Text.change_color("                                 4. show_path", "yellow")
+    puts Color_Text.change_color("                                 5. show_grid", "yellow")
+    puts Color_Text.change_color("                                 6. view_taxies", "yellow")
+    puts Color_Text.change_color("                                 7. help", "yellow")
+    puts Color_Text.change_color("                                 8. exit", "yellow")
+    puts
+    puts "Please enter a command from the options..."
     msg = gets.chomp
     case msg 
       when "exit"
@@ -35,7 +50,7 @@ begin
         puts "  create_taxi       add a taxi to the system, the system will automatically generate an index for the taxi."
         puts "  show_grid         show taxis' locations and their index number on the grid."
         puts "  show_path         show the path of the taxi move to the destination."
-        puts "  show_taxi         show the list of current_taxi and their status, location, ID and facing direction."
+        puts "  view_taxies       show the list of current_taxi and their status, location, ID and facing direction."
         puts "  move_taxi         move a taxi to another location."
       when "create_taxi"
         while (tag == true)
@@ -74,15 +89,24 @@ begin
         visual_grid = Grid.new(grid_arguments[0].to_i,grid_arguments[1].to_i,grid_arguments[2].to_i,grid_arguments[3].to_i)
         grid.print_grid
         puts "Grid has been successfully created #{}"
-      when "taxishow"
+      when "view_taxies"
+        puts "    TAXI NUMBER          POSITION [X,Y]         DIRECTION        STATUS"
+        puts "    ===========          ==============         =========        ======"
+        puts
         taxi_list.each do |item|
-          puts "taxi: #{item.index}"
+          if (item.car_status == 0)
+            tx_status = "Available"
+          else
+            tx_status = "Not available"
+          end
+          puts "    Taxi #{item.index}                 [#{item.position.x}, #{item.position.y}]                #{item.direction}            #{tx_status}"
         end
-      when "showgrid"
+        puts
+      when "show_grid"
         #grid.print_grid
-        puts "Visual Grid"
+        puts "                      Visual Grid"
         visual_grid.print_grid
-      when "move_to"
+      when "move_taxi"
         puts "Please input the taxi number : "
         taxi_number = gets.chomp().to_i;
         puts "Please enter the destination... eg.(10,15)"
@@ -102,6 +126,8 @@ begin
           temp_location.set_coordinates(item[0].to_i, item[1].to_i)
           temp_location.set_occupied(visual_grid, taxi_number)
         end
+      else
+        puts "Wrong Command..."
     end
 end
 
