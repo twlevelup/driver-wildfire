@@ -1,3 +1,8 @@
+require 'rubygems'
+require 'win32console'
+#require 'Win32/Console/ANSI'
+#include Win32::Console
+
 class Color_Text
    def self.colorize(text, color_code)
      "\e[#{color_code}m#{text}\e[0m"
@@ -7,7 +12,6 @@ class Color_Text
       case color.downcase
        when "red"
          colorize(text, 31)
-         return text
          
        when "green"
          colorize(text, 32)

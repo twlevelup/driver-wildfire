@@ -1,9 +1,7 @@
 
-#require './colors'
+require './colors'
 
 class Grid 
-
-	#Colorize = Color_Text.new
 
 	attr_accessor :x_min, :x_max, :y_min, :y_max
 	attr_accessor :grid;
@@ -20,11 +18,28 @@ class Grid
 		for i in 0...(y_max)
 			for j in 0...(x_max)
 				value = @grid[i][j]
-				#case value
-				#when 1					
-					print @grid[i][j]
-				#else
-				#end
+				case value
+				when 1					
+					print Color_Text.change_color("#{value}", "green")
+				when 2
+					print Color_Text.change_color("#{value}", "red")
+				when 3
+					print Color_Text.change_color("#{value}", "blue")
+				when 4
+					print Color_Text.change_color("#{value}", "pink")
+				when 5
+					print Color_Text.change_color("#{value}", "yellow")
+				when 6
+					print Color_Text.change_color("#{value}", "cyan")
+				when 7
+					print Color_Text.change_color("#{value}", "green")
+				when 8
+					print Color_Text.change_color("#{value}", "red")
+				when 9
+					print Color_Text.change_color("#{value}", "blue")
+				else
+					print Color_Text.change_color("#{value}", "grey")
+				end
 			end
 				puts
 		end

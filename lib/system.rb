@@ -4,6 +4,8 @@ require './grid'
 require './position'
 require './colors'
 require './CommandOperation'
+
+
 #class System
 begin
   grid = nil
