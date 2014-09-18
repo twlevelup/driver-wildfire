@@ -2,7 +2,6 @@ require 'colorize'
 require './car'
 require './grid'
 require './position'
-#require './colors'
 require './CommandOperation'
 require 'win32console'
 
@@ -53,7 +52,8 @@ begin
 				puts "  show_path         show the path of the taxi move to the destination.".green
 				puts "  view_taxies       show the list of current_taxi and their status, location,\n                    ID and facing direction.".green
 				puts "  move_taxi         move a taxi to another location.".green
-
+        puts 'Press "Enter" to continue... '
+        gets.chomp()
 			when "create_taxi"
 				while (tag == true)
 					puts "Please define the arguments for taxi (x,y,direction)..."
@@ -78,6 +78,8 @@ begin
 						puts "The taxi lacation is already been taken... Please give another location"
 							tag = true
 					end
+          puts'Press "Enter" to continue... '
+          gets.chomp()
 				end
 				
 			when "create_grid"
@@ -90,7 +92,9 @@ begin
 				grid = Grid.new(grid_arguments[0].to_i,grid_arguments[1].to_i,grid_arguments[2].to_i,grid_arguments[3].to_i)
 				visual_grid = Grid.new(grid_arguments[0].to_i,grid_arguments[1].to_i,grid_arguments[2].to_i,grid_arguments[3].to_i)
 				grid.print_grid
-				puts "Grid has been successfully created #{}"
+				puts "Grid has been successfully created."
+        puts'Press "Enter" to continue... '
+        gets.chomp()
 			when "view_taxies"
 				puts "    TAXI NUMBER          POSITION [X,Y]         DIRECTION        STATUS"
 				puts "    ===========          ==============         =========        ======"
@@ -103,7 +107,8 @@ begin
 					end
 					puts "    Taxi #{item.index}                 [#{item.position.x}, #{item.position.y}]                #{item.direction}            #{tx_status}"
 				end
-				puts
+        puts'Press "Enter" to continue... '
+        gets.chomp()
 			when "show_grid"
 				puts "Grid STATUS:"
         grid.print_grid
@@ -117,11 +122,11 @@ begin
       when "move_taxi"
 				puts "Please input the taxi number : "
 				taxi_number = gets.chomp().to_i;
-				puts "Please enter the destination... eg.(10,15)"
+        current_taxi = taxi_list[taxi_number-1]
+				puts "Please enter the destination... eg.(10,15)\n Now the taxi is at [#{current_taxi.position.x},#{current_taxi.position.y}]"
 				dest = gets.chomp().split(',')
 				destination.set_coordinates(dest[0].to_i,dest[1].to_i)
-				current_taxi = taxi_list[taxi_number-1]
-
+				
 				puts "The locations passes by the car : "
 				puts "[#{current_taxi.position.x},#{current_taxi.position.y}]"
 				
@@ -134,6 +139,8 @@ begin
 					temp_location.set_coordinates(item[0].to_i, item[1].to_i)
 					temp_location.set_occupied(visual_grid, taxi_number)
 				end
+        puts'Press "Enter" to continue... '
+        gets.chomp()
 			else
 				puts "Wrong Command..."
 		end
