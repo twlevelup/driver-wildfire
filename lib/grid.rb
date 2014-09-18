@@ -1,6 +1,4 @@
 
-require './colors'
-
 class Grid 
 
 	attr_accessor :x_min, :x_max, :y_min, :y_max
@@ -11,7 +9,7 @@ class Grid
 		@x_max = x_max
 		@y_min = y_min
 		@y_max = y_max
-		@grid = Array.new(y_max-y_min){Array.new(x_max-x_min,0)}
+		@grid = Array.new(y_max-y_min){Array.new(x_max-x_min," ")}
 	end	
 
 	def print_grid
@@ -20,28 +18,28 @@ class Grid
 				value = @grid[i][j]
 				case value
 				when 1					
-					print Color_Text.change_color("#{value}", "green")
+					print "#{value}".white.on_green
 				when 2
-					print Color_Text.change_color("#{value}", "red")
+					print "#{value}".on_red
 				when 3
-					print Color_Text.change_color("#{value}", "blue")
+					print "#{value}".on_blue
 				when 4
-					print Color_Text.change_color("#{value}", "pink")
+					print "#{value}".on_yellow
 				when 5
-					print Color_Text.change_color("#{value}", "yellow")
+					print "#{value}".on_cyan
 				when 6
-					print Color_Text.change_color("#{value}", "cyan")
+					print "#{value}".on_magenta
 				when 7
-					print Color_Text.change_color("#{value}", "green")
+					print "#{value}".on_red
 				when 8
-					print Color_Text.change_color("#{value}", "red")
+					print "#{value}".on_blue
 				when 9
-					print Color_Text.change_color("#{value}", "blue")
+					print "#{value}".on_yellow
 				else
-					print Color_Text.change_color("#{value}", "grey")
+					print "#{value}".white.on_yellow
 				end
 			end
-				puts
+			puts
 		end
 
 		return true

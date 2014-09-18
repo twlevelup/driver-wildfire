@@ -20,11 +20,11 @@ class Position
 	end
 
 	def is_available?(grid)
-		grid.grid[y][x] == 0
+		grid.grid[y][x] == " "
 	end
 
 	def set_available(grid)
-		grid.grid[y][x] = 0
+		grid.grid[y][x] = " "
 	end
 
 	def set_occupied(grid, index)
