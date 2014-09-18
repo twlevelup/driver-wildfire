@@ -24,9 +24,9 @@ class Grid
 				when 3
 					print "#{value}".on_blue
 				when 4
-					print "#{value}".on_yellow
-				when 5
 					print "#{value}".on_cyan
+				when 5
+					print "#{value}".on_magenta
 				when 6
 					print "#{value}".on_magenta
 				when 7
@@ -34,7 +34,7 @@ class Grid
 				when 8
 					print "#{value}".on_blue
 				when 9
-					print "#{value}".on_yellow
+					print "#{value}".on_cyan
 				else
 					print "#{value}".white.on_yellow
 				end
