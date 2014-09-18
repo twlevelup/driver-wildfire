@@ -5,5 +5,5 @@ group :development, :test do
     gem 'rake'
     gem 'rspec'
     gem 'colorize'
-    gem 'win32console'
+    #gem 'win32console'
 end
