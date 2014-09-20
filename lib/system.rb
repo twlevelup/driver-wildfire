@@ -26,7 +26,7 @@ begin
 	while true
 		tag = true
 		puts "======================================================".yellow.on_red
-		puts "       WILDFIRE AUTOMATED TAXI SERVICE                ".blue.on_red.blink
+		puts "       13CATS AUTOMATED TAXI SERVICE                  ".blue.on_red.blink
 		puts "======================================================".yellow.on_red
 		puts "       OPTIONS".cyan
 		puts "       1. create_grid".blue
@@ -52,8 +52,8 @@ begin
 				puts "  show_path         show the path of the taxi move to the destination.".green
 				puts "  view_taxies       show the list of current_taxi and their status, location,\n                    ID and facing direction.".green
 				puts "  move_taxi         move a taxi to another location.".green
-        puts 'Press "Enter" to continue... '
-        gets.chomp()
+		puts 'Press "Enter" to continue... '
+		gets.chomp()
 			when "create_taxi", "2"
 				while (tag == true)
 					puts "Please define the arguments for taxi (x,y,direction)..."
@@ -78,8 +78,8 @@ begin
 						puts "The taxi lacation is already been taken... Please give another location"
 							tag = true
 					end
-          puts'Press "Enter" to continue... '
-          gets.chomp()
+		  puts'Press "Enter" to continue... '
+		  gets.chomp()
 				end
 				
 			when "create_grid", "1"
@@ -93,11 +93,11 @@ begin
 				visual_grid = Grid.new(grid_arguments[0].to_i,grid_arguments[1].to_i,grid_arguments[2].to_i,grid_arguments[3].to_i)
 				grid.print_grid
 				puts "Grid has been successfully created."
-        puts'Press "Enter" to continue... '
-        gets.chomp()
-        when "view_taxies", "6"
-				puts "\tTAXI NUMBER\tPOSITION [X,Y]\t\tDIRECTION\tSTATUS"
-				puts "\t===========\t==============\t\t=========\t======" 
+		puts'Press "Enter" to continue... '
+		gets.chomp()
+		when "view_taxies", "6"
+				puts "\tTAXI NUMBER\tPOSITION [X,Y]\tDIRECTION\t\tSTATUS"
+				puts "\t===========\t==============\t=========\t\t======" 
 				puts
 				taxi_list.each do |item|
 					if (item.car_status == 0)
@@ -105,24 +105,24 @@ begin
 					else
 						tx_status = "Not available"
 					end
-					puts "\tTaxi #{item.index}\t\t[#{item.position.x}, #{item.position.y}]\t\t\t#{item.direction}\t\t#{tx_status}"
+					puts "\tTaxi #{item.index}\t\t[#{item.position.x}, #{item.position.y}]\t\t#{item.direction}\t\t#{tx_status}"
 				end
-        puts'Press "Enter" to continue... '
-        gets.chomp()
+		puts'Press "Enter" to continue... '
+		gets.chomp()
 			when "show_grid", "5"
 				puts "Grid STATUS:"
-        grid.print_grid
-        puts'Press "Enter" to continue... '
-        gets.chomp()
+		grid.print_grid
+		puts'Press "Enter" to continue... '
+		gets.chomp()
 			when "show_path", "4"
-        puts "Visual Path"
-        visual_grid.print_grid
-        puts'Press "Enter" to continue... ' 
-        gets.chomp()
-      when "move_taxi", "3"
+		puts "Visual Path"
+		visual_grid.print_grid
+		puts'Press "Enter" to continue... ' 
+		gets.chomp()
+	  when "move_taxi", "3"
 				puts "Please input the taxi number : "
 				taxi_number = gets.chomp().to_i;
-        current_taxi = taxi_list[taxi_number-1]
+		current_taxi = taxi_list[taxi_number-1]
 				puts "Please enter the destination... eg.(10,15)\n Now the taxi is at [#{current_taxi.position.x},#{current_taxi.position.y}]"
 				dest = gets.chomp().split(',')
 				destination.set_coordinates(dest[0].to_i,dest[1].to_i)
@@ -139,10 +139,11 @@ begin
 					temp_location.set_coordinates(item[0].to_i, item[1].to_i)
 					temp_location.set_occupied(visual_grid, taxi_number)
 				end
-        puts'Press "Enter" to continue... '
-        gets.chomp()
+		puts'Press "Enter" to continue... '
+		gets.chomp()
 			else
-				puts "Wrong Command..."
+				puts "Wrong Command...".red
+				puts
 		end
   end
 end
