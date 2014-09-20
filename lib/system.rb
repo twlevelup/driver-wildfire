@@ -1,9 +1,10 @@
 require 'colorize'
-require './car'
-require './grid'
-require './position'
-require './CommandOperation'
-require 'win32console'
+require 'win32console' if Gem.win_platform?
+
+require_relative 'car'
+require_relative 'grid'
+require_relative 'position'
+require_relative 'CommandOperation'
 
 
 #class System
