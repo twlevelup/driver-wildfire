@@ -22,7 +22,7 @@ begin
 	temp_location = Position.new(0,0)
 	command_filter = CommandOperation.new
 	
-	#system "cls"
+	system "cls"
 
 	while true
 		tag = true
@@ -97,8 +97,8 @@ begin
         puts'Press "Enter" to continue... '
         gets.chomp()
 			when "view_taxies"
-				puts "    TAXI NUMBER          POSITION [X,Y]         DIRECTION        STATUS"
-				puts "    ===========          ==============         =========        ======"
+				puts "\tTAXI NUMBER\tPOSITION [X,Y]\t\tDIRECTION\tSTATUS"
+				puts "\t===========\t==============\t\t=========\t======"
 				puts
 				taxi_list.each do |item|
 					if (item.car_status == 0)
@@ -106,7 +106,7 @@ begin
 					else
 						tx_status = "Not available"
 					end
-					puts "    Taxi #{item.index}                 [#{item.position.x}, #{item.position.y}]                #{item.direction}            #{tx_status}"
+					puts "\tTaxi #{item.index}\t\t[#{item.position.x}, #{item.position.y}]\t\t\t#{item.direction}\t\t#{tx_status}"
 				end
         puts'Press "Enter" to continue... '
         gets.chomp()
