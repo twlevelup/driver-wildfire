@@ -1,6 +1,5 @@
-require 'car'
-require 'position'
-require 'grid'
+require_relative 'spec_helper'
+
 RSpec.describe Car do
     let (:grid) {Grid.new(0,50,0,50)}
     let (:car_0) {Car.new(0, grid, Position.new(4,4), :N)}

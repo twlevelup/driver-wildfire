@@ -1,6 +1,4 @@
-
-require 'grid'
-require 'position'
+require_relative 'spec_helper'
 
 RSpec.describe Grid do
 	subject { Grid.new(0,50,0,50) }

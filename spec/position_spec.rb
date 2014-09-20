@@ -1,4 +1,4 @@
-require 'position'
+require_relative 'spec_helper'
 
 describe Position do
 	let (:grid) {Grid.new(0,50,0,50)}
