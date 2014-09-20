@@ -18,15 +18,15 @@ class Grid
 				value = @grid[i][j]
 				case value
 				when 1					
-					print "#{value}".white.on_green.blink
-				when 2
 					print "#{value}".on_red.blink
+				when 2
+					print "#{value}".on_magenta.blink
 				when 3
 					print "#{value}".on_blue.blink
 				when 4
 					print "#{value}".on_cyan.blink
 				when 5
-					print "#{value}".on_magenta.blink
+					print "#{value}".on_green.blink
 				when 6
 					print "#{value}".on_magenta.blink
 				when 7
