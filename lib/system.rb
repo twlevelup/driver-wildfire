@@ -75,7 +75,7 @@ begin
 							taxi_index += 1              
 							tag = false
 					else
-						puts "The taxi lacation is already been taken... Please give another location"
+						puts "The taxi location is already been taken... Please give another location"
 							tag = true
 					end
 		  puts'Press "Enter" to continue... '
