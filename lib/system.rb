@@ -41,10 +41,10 @@ begin
 		puts "Please enter a command from the options..."
 		msg = gets.chomp
 		case msg 
-			when "exit"
-				puts 'The system has been shut down.'
+			when "exit", "8"
+				puts 'The system has been shut down.'.red
 				exit
-			when "help"
+			when "help", "7"
 				puts "The most commonly Basic Commands are:".colorize(:blue)
 				puts "  create_grid       add a grid for the system, define the boundary of movement.".green
 				puts "  create_taxi       add a taxi to the system, the system will automatically\n                    generate an index for the taxi.".green
@@ -54,7 +54,7 @@ begin
 				puts "  move_taxi         move a taxi to another location.".green
         puts 'Press "Enter" to continue... '
         gets.chomp()
-			when "create_taxi"
+			when "create_taxi", "2"
 				while (tag == true)
 					puts "Please define the arguments for taxi (x,y,direction)..."
 					initial_arguments = gets.chomp
@@ -82,7 +82,7 @@ begin
           gets.chomp()
 				end
 				
-			when "create_grid"
+			when "create_grid", "1"
 				puts "Please input the arguments for grid as the format(x_min,x_max,y_min,y_max)... eg.(0,30,0,30)"
 				grid_command = gets.chomp()
 				while !command_filter.create_grid_command_is_valid?(grid_command)
@@ -95,9 +95,9 @@ begin
 				puts "Grid has been successfully created."
         puts'Press "Enter" to continue... '
         gets.chomp()
-			when "view_taxies"
+        when "view_taxies", "6"
 				puts "\tTAXI NUMBER\tPOSITION [X,Y]\t\tDIRECTION\tSTATUS"
-				puts "\t===========\t==============\t\t=========\t======"
+				puts "\t===========\t==============\t\t=========\t======" 
 				puts
 				taxi_list.each do |item|
 					if (item.car_status == 0)
@@ -109,17 +109,17 @@ begin
 				end
         puts'Press "Enter" to continue... '
         gets.chomp()
-			when "show_grid"
+			when "show_grid", "5"
 				puts "Grid STATUS:"
         grid.print_grid
         puts'Press "Enter" to continue... '
         gets.chomp()
-			when "show_path"
+			when "show_path", "4"
         puts "Visual Path"
         visual_grid.print_grid
         puts'Press "Enter" to continue... ' 
         gets.chomp()
-      when "move_taxi"
+      when "move_taxi", "3"
 				puts "Please input the taxi number : "
 				taxi_number = gets.chomp().to_i;
         current_taxi = taxi_list[taxi_number-1]
