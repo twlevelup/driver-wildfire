@@ -1,6 +1,5 @@
 require 'colorize'
-require 'win32console' if Gem.win_platform?
-
+require 'win32console' if RUBY_PLATFORM =~ /i386-mingw32/
 require_relative 'car'
 require_relative 'grid'
 require_relative 'position'

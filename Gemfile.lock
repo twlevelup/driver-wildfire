@@ -16,6 +16,7 @@ GEM
     rspec-mocks (3.0.3)
       rspec-support (~> 3.0.0)
     rspec-support (3.0.3)
+    win32console (1.3.2-x86-mingw32)
 
 PLATFORMS
   ruby
@@ -25,3 +26,4 @@ DEPENDENCIES
   colorize
   rake
   rspec
+  win32console
