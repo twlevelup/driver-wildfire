@@ -231,16 +231,28 @@ RSpec.describe Car do
     end
   end
 
-  context 'testing for two cars' do
-    #let (:car_0) {Car.new(0, grid, Position.new(4,4), :N)}
-    #let (:car_1) {Car.new(1, grid, Position.new(4,4), :N)}
+  context 'testing for reverse function' do
+    it 'facing north ' do
+      facing_north.reverse
+      expect(facing_north.position.get_coordinates).to eq([4,4])
+    end
+
+    it 'facing east ' do
+      facing_east.reverse
+      expect(facing_east.position.get_coordinates).to eq([2,3])
+    end
+
+    it 'facing west ' do
+      facing_west.reverse
+      expect(facing_west.position.get_coordinates).to eq([5,5])
+    end
+
+    it 'facing south' do
+      facing_south.reverse
+      expect(facing_south.position.get_coordinates).to eq([3,4])
+    end
+
   end
-
-
-  #it 'should print the grid' do
-  #  expect(grid.print_grid).to eq(true)
-  #end
-
 
 end
 

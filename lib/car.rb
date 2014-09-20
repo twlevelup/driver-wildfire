@@ -78,7 +78,6 @@ class Car
     	else
     		"Wrong initial direction"
     	end
-        #return location_array
     end
 
     def reverse
@@ -178,7 +177,6 @@ class Car
             case item
             when :F
                 move()
-                #puts "[#{@position.x},#{@position.y}]"
                 location_array.push("#{@position.x},#{@position.y}")
             when :L 
                 turn_left()
